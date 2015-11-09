@@ -1,0 +1,22 @@
+citHeader("To cite econum in publications use:")
+
+citEntry(entry="Manual",
+         title = "econum: various tools developped at EcoNum lab",
+         author = "Philippe Grosjean",
+         organization = "UMONS",
+         address      = "Mons, Belgium",
+         year         = version$year,
+         url          = "http://econum.umons.ac.be/labo/",
+
+         textVersion =
+         paste("Grosjean, Ph. (", version$year, "). ",
+               "econum: various tools developed at EcoNum lab. ",
+               "UMONS, Mons, Belgium. ",
+               "URL http://econum.umons.ac.be/labo/.",
+               sep="")
+         )
+
+citFooter("We have invested a lot of time and effort in creating hese routines,",
+          "please cite us when using them together with R.",
+	  "See also", sQuote("citation()"),
+	  "for citing R.")

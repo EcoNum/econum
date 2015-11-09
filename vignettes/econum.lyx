@@ -1,0 +1,3171 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass scrbook
+\begin_preamble
+% \VignetteIndexEntry{econum - Various tools for the EcoNum lab}
+%\VignettePackage{econum}
+
+% provides caption formatting
+\usepackage[labelfont=bf, tableposition=top]{caption}
+\pdfimageresolution 96
+\end_preamble
+\use_default_options false
+\begin_modules
+svSweave
+\end_modules
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding utf8x
+\fontencoding global
+\font_roman palatino
+\font_sans berasans
+\font_typewriter beramono
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc true
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\float_placement tbh
+\paperfontsize default
+\spacing single
+\use_hyperref true
+\pdf_title "SciViews - The Visual Guide (part 2)"
+\pdf_author "Philippe Grosjean"
+\pdf_subject "Tutorial to SciViews (2)"
+\pdf_bookmarks true
+\pdf_bookmarksnumbered false
+\pdf_bookmarksopen false
+\pdf_bookmarksopenlevel 1
+\pdf_breaklinks true
+\pdf_pdfborder false
+\pdf_colorlinks true
+\pdf_backref false
+\pdf_pdfusetitle true
+\pdf_quoted_options "linkcolor=blue, urlcolor=blue, citecolor=blue, pagecolor=blue"
+\papersize a4paper
+\use_geometry false
+\use_amsmath 0
+\use_esint 0
+\use_mhchem 1
+\use_mathdots 1
+\cite_engine natbib_authoryear
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 2
+\paperpagestyle default
+\bullet 0 0 17 -1
+\bullet 1 0 15 -1
+\bullet 2 0 8 -1
+\bullet 3 0 9 -1
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+The 'econum' R package
+\end_layout
+
+\begin_layout Subject
+Tools for the EcoNum lab (Ecologie Numérique des Milieux Aquatiques) at
+ UMONS
+\end_layout
+
+\begin_layout Author
+Ph.
+ Grosjean <Philippe.Grosjean@umons.ac.be>
+\end_layout
+
+\begin_layout Chapter
+Introduction
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+setkeys{Gin}{width=1.00
+\backslash
+textwidth}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout R-Opts
+keep.source = TRUE, pdf = TRUE, eps = FALSE
+\end_layout
+
+\begin_layout Standard
+The 
+\begin_inset Flex CharStyle:Pkg
+status collapsed
+
+\begin_layout Plain Layout
+econum
+\end_layout
+
+\end_inset
+
+ R package is a collection of R functions used at the EcoNum lab to perform
+ various tasks and calculations.
+ It contains routines for (note that much of these function still need to
+ be added!):
+\end_layout
+
+\begin_layout Itemize
+Interface many scientific devices like ph-meters, titrators, scales, CO
+\begin_inset Formula $_{\text{2}}$
+\end_inset
+
+-recorder, IKS computers, etc.,
+\end_layout
+
+\begin_layout Itemize
+Controlling the proprietary chemostat, including display and diagnostic
+ graphs,
+\end_layout
+
+\begin_layout Itemize
+Pilot the automatic titrators for the alkalinity and calcium titrations,
+\end_layout
+
+\begin_layout Itemize
+Calculate concentrations and stats on measurements done using a spectrophotomete
+r,
+\end_layout
+
+\begin_layout Itemize
+Perform various calculations and conversions related to ecophysiological
+ studies of aquatic invertebrates,
+\end_layout
+
+\begin_layout Itemize
+And much more...
+\end_layout
+
+\begin_layout Section
+Installation of the econum R package
+\end_layout
+
+\begin_layout Standard
+Get R (at least 2.10.0) and install it.
+ Then, get either the source (for Linux and Mac OS X) of the 
+\begin_inset Flex CharStyle:Pkg
+status collapsed
+
+\begin_layout Plain Layout
+econum
+\end_layout
+
+\end_inset
+
+ package (
+\begin_inset Flex CharStyle:File
+status collapsed
+
+\begin_layout Plain Layout
+econum_x.y-z.tar.gz
+\end_layout
+
+\end_inset
+
+), or the Windows binaries (
+\begin_inset Flex CharStyle:File
+status collapsed
+
+\begin_layout Plain Layout
+econum_x.y-z.zip
+\end_layout
+
+\end_inset
+
+) from 
+\begin_inset Flex CharStyle:File
+status collapsed
+
+\begin_layout Plain Layout
+EN-Dolphin
+\end_layout
+
+\end_inset
+
+.
+ Install them inside R (see R online help and manuals to learn how to do
+ that).
+ You need administrative rights on the machine to do this install.
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Box Boxed
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "100col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+Under Windows (95 -> XP), if you intend to pilot the parallel interface
+ card, you must also copy 
+\begin_inset Flex CharStyle:File
+status collapsed
+
+\begin_layout Plain Layout
+inpout32.dll
+\end_layout
+
+\end_inset
+
+ and 
+\begin_inset Flex CharStyle:File
+status collapsed
+
+\begin_layout Plain Layout
+lpttcl.dll
+\end_layout
+
+\end_inset
+
+ from 
+\begin_inset Flex CharStyle:File
+status collapsed
+
+\begin_layout Plain Layout
+/bin
+\end_layout
+
+\end_inset
+
+ subdirectory of the 
+\begin_inset Flex CharStyle:Pkg
+status collapsed
+
+\begin_layout Plain Layout
+econum
+\end_layout
+
+\end_inset
+
+ package to 
+\begin_inset Flex CharStyle:File
+status collapsed
+
+\begin_layout Plain Layout
+c:
+\backslash
+Windows
+\backslash
+system32
+\end_layout
+
+\end_inset
+
+ (or whatever directory where system dlls are installed).
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Chapter
+General instructions for working in the lab
+\end_layout
+
+\begin_layout Standard
+This chapter covers general instructions that are supposed to be known for
+ working in the lab, but that are always good to check.
+ It covers general actions to do good laboratory work.
+ TODO: continue this and cover good practices in the laboratory topic.
+\end_layout
+
+\begin_layout Itemize
+General behavior in the lab and security issues: no food, no drink, correct
+ clothes, always keep working area clean and in order, work under the 
+\begin_inset Quotes eld
+\end_inset
+
+hotte
+\begin_inset Quotes erd
+\end_inset
+
+, know basic security issues (where is the extinctor? what to do in case
+ of ..., etc.)
+\end_layout
+
+\begin_layout Itemize
+The water: various water qualities and the importance of using the right
+ water quality.
+\end_layout
+
+\begin_layout Itemize
+Cleaning equipment and glassware.
+\end_layout
+
+\begin_layout Itemize
+Logging all activities in a logbook.
+\end_layout
+
+\begin_layout Itemize
+What else?
+\end_layout
+
+\begin_layout Section
+Marine chemistry: basic knowledges on concentration in seawater
+\end_layout
+
+\begin_layout Standard
+By J.
+ Leblud and Ph.
+ Grosjean, 2008.
+\end_layout
+
+\begin_layout Quotation
+Rappels très généraux de chimie : atome, élément chimique, molécule, ion.
+ Mesure de la quantité de ces constituants: la mole, et la masse correspondante 
+: la masse molaire.
+ Dissolution d'un soluté dans un solvant et mesure de la concentration d'un
+ soluté dans le solvant: la molarité, la molalité et la molinité.
+ Avantages et inconvénients de ces différentes mesures en chimie de l'eau
+ de mer.
+ Réalisation de solutions de molarité connue en pratique.
+\end_layout
+
+\begin_layout Subsection
+Rappel de Chimie générale
+\end_layout
+
+\begin_layout Subsubsection
+Atome
+\end_layout
+
+\begin_layout Standard
+Un atome est constitué de protons (chargés positivement), de neutrons (électriqu
+ement neutres) et d'électrons (chargés négativement).
+ Les protons et les neutrons forment les nucléons qui composent le noyau
+ de l'atome autour duquel les électrons gravitent.
+\end_layout
+
+\begin_layout Subsubsection
+Elément chimique
+\end_layout
+
+\begin_layout Standard
+Chaque atome possède un nombre fixe de protons (correspondant au 
+\series bold
+numéro atomique
+\series default
+) qui définit un 
+\series bold
+élément chimique
+\series default
+ indiqué par un symbole (ex: H pour l'hydrogène qui contient 1 proton, O
+ pour l'oxygène qui contient 8 protons, ...).
+ Les différents éléments chimiques sont classés dans le 
+\series bold
+tableau périodique des éléments
+\series default
+.
+\end_layout
+
+\begin_layout Subsubsection
+Isotope
+\end_layout
+
+\begin_layout Standard
+Pour un même élément chimique, le nombre de neutrons peut différer entre
+ les atomes.
+ Chaque atome correspond alors à un 
+\series bold
+isotope
+\series default
+ particulier contenant un nombre donné de neutrons.
+ Cet isotope est noté par un exposant devant le symbole de l'élément indiquant
+ le nombre de nucléons dans son noyau .
+ Par exemple, 
+\begin_inset Formula $^{\text{16}}$
+\end_inset
+
+O est l'isotope 16 de l'oxygène.
+ Comme l'élément oxygène contient toujours 8 protons, cela signifie que
+ cet isotope contient aussi 8 neutrons.
+\end_layout
+
+\begin_layout Subsubsection
+Molécule
+\end_layout
+
+\begin_layout Standard
+Une 
+\series bold
+molécule
+\series default
+ est constituée d’un ensemble d'atomes.
+ C'est le constituant de base de toute 
+\series bold
+substance chimique
+\series default
+.
+ La composition d'un molécule s'inscrit en rassemblant la liste des atomes
+ constitutifs (éventuellement suivis de leur nombre en indices si plusieurs
+ atomes du même élément sont présents dans la molécule).
+ Par exemple, une molécule d'eau possède 2 atomes d'hydrogène et un atome
+ d'oxygène, et s'écrira donc H
+\begin_inset Formula $_{\text{2}}$
+\end_inset
+
+O.
+ Le sulfure d'hydrogène s'écrit H
+\begin_inset Formula $_{\text{2}}$
+\end_inset
+
+S.
+\end_layout
+
+\begin_layout Standard
+Chaque molécule a des propriétés physiques et chimiques particulières.
+ L'eau H
+\begin_inset Formula $_{\text{2}}$
+\end_inset
+
+O est un liquide à température de 20°C et à pression de 1 atm et est la
+ molécule la plus abondante dans les organismes vivants, alors que le sulfure
+ d'hydrogène H
+\begin_inset Formula $_{\text{2}}$
+\end_inset
+
+S est un gaz à même température et pression et est extrêmement toxique pour
+ les êtres vivants.
+\end_layout
+
+\begin_layout Subsubsection
+Mole
+\end_layout
+
+\begin_layout Standard
+La quantité de molécules ou d’atomes s’exprime en 
+\series bold
+mole
+\series default
+ (unité du Système International dont le symbole est 
+\series bold
+mol
+\series default
+).
+ Une mole est strictement définie comme le nombre d'éléments constitutifs
+ (atomes, molécules, ions, électrons) correspondant au nombre d'atomes dans
+ 12g de 
+\begin_inset Formula $^{\text{12}}$
+\end_inset
+
+C (nombre d'Avogadro valant environ 
+\begin_inset Formula $6.022\cdot10^{23}$
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "100col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+
+\emph on
+Remarque
+\emph default
+ : un millième de mole est une millimole (symbole mmol), un millionième
+ de mole est une micromole (symbole µmol), et un milliardième de mole est
+ une nanomole (nmol).
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Donc, quel que soit le poids de la substance considérée, 1 mole de cette
+ substance contient toujours le même nombre d'items.
+ Par contre, son poids varie, qui est mesuré par la 
+\series bold
+masse atomique
+\series default
+ ou 
+\series bold
+moléculaire
+\series default
+ exprimée en g.mol
+\begin_inset Formula $^{\text{-1}}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+Masse atomique
+\end_layout
+
+\begin_layout Standard
+La masse atomique est le poids moyen des isotopes d’un atome donné, considérant
+ leur abondance relative rencontrée dans 
+\begin_inset Quotes eld
+\end_inset
+
+la nature
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Exemple
+\emph default
+ : l'hydrogène se rencontre sous forme de trois isotopes différents :
+\end_layout
+
+\begin_layout Itemize
+1H = 1 proton → 1 mole ≈ 1 g abondance : >99%
+\end_layout
+
+\begin_layout Itemize
+2H = 1 proton et 1 neutron → 1 mole ≈ 2 g, abondance : <1% (deutérium)
+\end_layout
+
+\begin_layout Itemize
+3H = 1 proton et 2 neutrons → 1 mole ≈ 3 g, abondance : <1% (tritium)
+\end_layout
+
+\begin_layout Standard
+La masse atomique est donc la moyenne du poids atomique de chaque isotope,
+ pondérée par leur abondance (telle que rencontrée habituellement dans la
+ nature).
+ Pour l'hydrogène, la masse atomique est de 1.008 g.mol
+\begin_inset Formula $^{\text{-1}}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Remarque
+\emph default
+ : certains isotopes sont radioactifs, c'est-à-dire qu'ils sont instables
+ et libèrent des particules élémentaires en se décomposant.
+\end_layout
+
+\begin_layout Subsubsection
+Masse moléculaire, masse molaire
+\end_layout
+
+\begin_layout Standard
+De même, pour une molécule, sa masse moléculaire peut être obtenue par l'additio
+n des masses atomiques de chaque atome formant la molécule étudiée.
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Exemple
+\emph default
+ : une mole d'eau H
+\begin_inset Formula $_{\text{2}}$
+\end_inset
+
+O pèse 2 .
+ 1 + 1 .
+ 16 ≈ 18 g.mol
+\begin_inset Formula $^{\text{-1}}$
+\end_inset
+
+ (le calcul précis donne 18.0153 g.mol
+\begin_inset Formula $^{\text{-1}}$
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+Ainsi, en pratique, ayant pesé une quantité de substance donnée, le nombre
+ de moles est calculé en divisant le poids (en g) par la masse moléculaire
+ de la substance.
+ De manière générale, on parle de masse molaire (MM) pour tout type de substance.
+\end_layout
+
+\begin_layout Subsubsection
+Ionisation
+\end_layout
+
+\begin_layout Standard
+Une molécule peut perdre ou gagner un ou plusieurs électrons.
+ Donc ce cas, elle sera chargée négativement, plus d'électrons que de protons,
+ ou positivement, et s'appelle 
+\series bold
+ion
+\series default
+ (les 
+\series bold
+cations
+\series default
+ sont des ions chargés positivement et les 
+\series bold
+anions
+\series default
+ sont chargés négativement).
+ La charge est indiquée par des symboles + ou – inscrit en exposant après
+ le(s) symbole(s) des constituants.
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Exemple
+\emph default
+ : H
+\begin_inset Formula $^{\text{+}}$
+\end_inset
+
+ est un cation d'hydrogène ayant perdu son unique électron (on parle aussi
+ couramment de 
+\begin_inset Quotes eld
+\end_inset
+
+proton
+\begin_inset Quotes erd
+\end_inset
+
+ dans ce cas particulier, bien qu'il s'agisse d'un abus de langage puisqu'il
+ s'agit bien ici d'un ion).
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Remarque
+\emph default
+ : les électrons, contrairement aux protons et aux neutrons, ont une masse
+ négligeable.
+ Donc, ils ne sont pas pris en compte dans le calcul des masses moléculaires.
+\end_layout
+
+\begin_layout Subsubsection
+Dissolution
+\end_layout
+
+\begin_layout Standard
+Une molécule (le 
+\series bold
+soluté
+\series default
+) peut se dissoudre dans l'eau ou d'autres 
+\series bold
+solvants
+\series default
+ (ex : NaCl = 
+\series bold
+soluté
+\series default
+ dans H
+\begin_inset Formula $_{\text{2}}$
+\end_inset
+
+O = 
+\series bold
+solvant
+\series default
+).
+ Cette molécule se 
+\series bold
+dissocie
+\series default
+ alors dans le solvant en ions :
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\mathrm{NaCl}\leftrightarrow\mathrm{Na}^{+}+\mathrm{Cl}^{-}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+L'ion Na
+\begin_inset Formula $^{\text{+}}$
+\end_inset
+
+ a perdu un électron qui a été récupéré par l'ion Cl
+\begin_inset Formula $^{\text{-}}$
+\end_inset
+
+.
+ A noter que l'expression précédente est une 
+\series bold
+réaction chimique
+\series default
+.
+\end_layout
+
+\begin_layout Standard
+L'eau elle-même est dissociée en très petite fraction, en ions hydrogène
+ (H
+\begin_inset Formula $^{\text{+}}$
+\end_inset
+
+) et hydroxyde (OH
+\begin_inset Formula $^{\text{-}}$
+\end_inset
+
+) :
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\mathrm{H_{2}O}\leftrightarrow\mathrm{H}^{+}+\mathrm{OH}^{-}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Dans le cas où une dissociation en ions est très partielle, cette réaction
+ (dynamique et à double sens) est définie par une constante de dissociation
+ qui caractérise la quantité de la molécule qui est dissociée sous forme
+ d'ions.
+ Pour l'eau, sa constante de dissociation est définie comme (voir aussi
+ pH) :
+\begin_inset Formula 
+\[
+Kw=[\mathrm{H}^{+}]\cdot[\mathrm{OH}^{-}]
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Sel
+\end_layout
+
+\begin_layout Standard
+Une molécule présente sous forme solide (cristallisée) qui se dissout dans
+ l'eau et s'y dissociée est appelée 
+\series bold
+sel
+\series default
+.
+ Un sel peut éventuellement cristalliser en emprisonnant des molécules d'eau
+ dans sa structure cristalline.
+ Il sera dit alors 
+\series bold
+hydraté
+\series default
+ (
+\series bold
+anhydre
+\series default
+ dans le cas contraire).
+ Ceci est indiqué par une formule du type: MgCl
+\begin_inset Formula $_{\text{2}}$
+\end_inset
+
+.6H
+\begin_inset Formula $_{\text{2}}$
+\end_inset
+
+O.
+ Dans cet exemple, la cristallisation du chlorure de magnésium MgCl
+\begin_inset Formula $_{\text{2}}$
+\end_inset
+
+ s'est faite en emprisonnant 6 molécules d'eau par molécule de chlorure
+ de magnésium qui est alors dit hexahydraté.
+\end_layout
+
+\begin_layout Standard
+Il faut naturellement prendre ces molécules d'eau en compte dans le calcul
+ de la masse molaire du sel hydraté.
+\end_layout
+
+\begin_layout Standard
+Par exemple, la masse molaire de MgCl
+\begin_inset Formula $_{\text{2}}$
+\end_inset
+
+ est de 95.3 g.mol
+\begin_inset Formula $^{\text{-1}}$
+\end_inset
+
+, alors que la masse molaire de MgCl
+\begin_inset Formula $_{\text{2}}$
+\end_inset
+
+.6H
+\begin_inset Formula $_{\text{2}}$
+\end_inset
+
+O est de 203.3 g.mol
+\begin_inset Formula $^{\text{-1}}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+Concentration
+\end_layout
+
+\begin_layout Standard
+Il s’agit de la mesure de la quantité d'un 
+\series bold
+soluté
+\series default
+ par quantité de 
+\series bold
+solvant
+\series default
+.
+ Plusieurs unités différentes sont utilisées pour caractériser une concentration
+ chimique, mais les plus utiles en chimie expriment le soluté sous forme
+ de moles.
+ En fait, les nombres de moles sont liées au nombre de molécules ou ions
+ qui réagissent dans une réaction chimique.
+ On parle de la 
+\series bold
+stoechiométrie
+\series default
+ de la réaction.
+\end_layout
+
+\begin_layout Standard
+Par exemple, la précipitation du chlorure de magnésium fait intervenir 2
+ molécules (moles) de chlorure Cl
+\begin_inset Formula $^{\text{-}}$
+\end_inset
+
+ par molécule (mole) de magnésium Mg
+\begin_inset Formula $^{\text{2+}}$
+\end_inset
+
+ pour former une molécule (mole) de sel MgCl
+\begin_inset Formula $_{\text{2}}$
+\end_inset
+
+ :
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\mathrm{Mg}^{2+}+2\mathrm{Cl}^{-}\leftrightarrow\mathrm{MgCl}_{2}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Comme l'ion Mg
+\begin_inset Formula $^{\text{2+}}$
+\end_inset
+
+ a une masse molaire de 24.3 g, et l'ion chlorure Cl
+\begin_inset Formula $^{\text{-}}$
+\end_inset
+
+ a une masse molaire de 35.5 g, la réaction fera intervenir 2 fois 35.5 g,
+ soit 71.0 g de chlorure pour 24.3 g de magnésium.
+ Le tout formera, donc, 95.3 g de chlorure de magnésium.
+ Nous voyons clairement que l'expression des quantités présentes en solution
+ et/ou intervenant dans une réaction chimique sous forme de leurs masses
+ est malaisé à manipuler car la stoechiométrie de la réaction n'y apparait
+ pas clairement.
+\end_layout
+
+\begin_layout Standard
+Par contre, la même réaction exprimée en moles est nettement plus claire :
+ 2 moles de chlorures réagissent en effet avec 1 mole de magnésium pour
+ former 1 mole de chlorure de magnésium.
+\end_layout
+
+\begin_layout Subsubsection
+Concentration molaire
+\end_layout
+
+\begin_layout Standard
+Trois unités principales nous intéressent préférentiellement en chimie marine :
+\end_layout
+
+\begin_layout Itemize
+La 
+\series bold
+molarité
+\series default
+ (M) qui exprime le nombre de moles de soluté par litre de solution (mol.L
+\begin_inset Formula $^{\text{-1}}$
+\end_inset
+
+)
+\end_layout
+
+\begin_layout Itemize
+La 
+\series bold
+molalité
+\series default
+ (m) exprime le nombre de moles de soluté par kilo de solvant (mole.kg-H
+\begin_inset Formula $_{\text{2}}$
+\end_inset
+
+O
+\begin_inset Formula $^{\text{-1}}$
+\end_inset
+
+)
+\end_layout
+
+\begin_layout Itemize
+La 
+\series bold
+molinité
+\series default
+ est une mesure moins connue qui exprime le nombre de moles de soluté par
+ kilo de solution (mole.kg-soln
+\begin_inset Formula $^{\text{-1}}$
+\end_inset
+
+)
+\end_layout
+
+\begin_layout Standard
+Les chimistes utilisent souvent la molarité.
+ En effet, c'est la mesure la plus proche de la façon dont une solution
+ est préparée: un poids de sel (facile à convertir en nombres de moles)
+ est ajouté dans un matras jaugé, et le solvant est ajouté au trait, donnant
+ ainsi une mesure du volume de la solution.
+ Au final, la concentration est donc naturellement exprimée en molarité.
+\end_layout
+
+\begin_layout Standard
+Cependant, les liquides se dilatant et se contractant avec la température,
+ la molarité est dépendante de celle-ci.
+ Cela pose problème lorsque le liquide est amené à changer de température,
+ comme cela se passe dans la mer.
+ La pression a également un effet sur le volume du liquide, même si cet
+ effet est plus limité.
+ Pour être tout à fait précis, il faudrait préciser à quelle température
+ (et quelle pression) la molarité est déterminée.
+\end_layout
+
+\begin_layout Standard
+La molalité est préférée pour son indépendance à la température et à la
+ pression.
+ Pour la solution d'un seul sel dans de l'eau pure, la molalité est facile
+ à déterminer en pesant la solution, connaissant le poids de sel (ou son
+ nombre de moles, puisque la conversion en poids est facile à faire) dans
+ la solution, et en pesant cette solution.
+\end_layout
+
+\begin_layout Standard
+En eau de mer, ce calcul est plus difficile, car la détermination du poids
+ de l'eau à partir de la pesée d'eau de mer nécessite également la connaissance
+ du poids des nombreux ions qui constituent cette eau de mer.
+ C'est pour cette raison que les chimistes marins tendent à préférer la
+ molinité comme mesure de concentration dans l'eau de mer.
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Remarque
+\emph default
+ : si la densité d'un liquide tend à diminuer avec l'augmentation de température
+ (le liquide se dilate), l'eau a un comportement particulier car en dessous
+ de 4°C, elle se contracte à nouveau.
+ Cela rend encore plus difficile le travail en terme de molarité, et le
+ calcul de la densité de l'eau fait appel à des équations complexes qui
+ calculent la densité de l'eau en fonction de sa température, salinité et
+ pression.
+ Pour l'eau de mer, cette équation s'appelle l'
+\series bold
+équation d'état de l'eau de mer
+\series default
+.
+\end_layout
+
+\begin_layout Subsubsection
+Concentration massique
+\end_layout
+
+\begin_layout Standard
+Différentes unités de concentration massique existent :
+\end_layout
+
+\begin_layout Itemize
+g.kg
+\begin_inset Formula $^{\text{-1}}$
+\end_inset
+
+ = ‰
+\end_layout
+
+\begin_layout Itemize
+mg.kg
+\begin_inset Formula $^{\text{-1}}$
+\end_inset
+
+ = ppm, 
+\begin_inset Quotes eld
+\end_inset
+
+parts par million
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+µg.kg
+\begin_inset Formula $^{\text{-1}}$
+\end_inset
+
+ = ppb , 
+\begin_inset Quotes eld
+\end_inset
+
+parts par billion
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+g.L
+\begin_inset Formula $^{\text{-1}}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+etc.
+\end_layout
+
+\begin_layout Standard
+Il vaut mieux convertir ces unités en concentration molaire, ou en molinité.
+\end_layout
+
+\begin_layout Subsubsection
+Conversion entre unités
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Convertir des grammes en moles
+\series default
+ : Soit 
+\begin_inset Formula $x$
+\end_inset
+
+, la masse du sel étudié et 
+\begin_inset Formula $MMx$
+\end_inset
+
+ , sa masse molaire.
+ La quantité de ce sel en moles, 
+\begin_inset Formula $y$
+\end_inset
+
+, sera égale à :
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+y(\mathrm{mol})=x(\mathrm{g})/Mmx(\mathrm{g\cdot mo}\mathrm{l}^{-1})
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Convertir des moles en grammes
+\series default
+ : Soit 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\noun off
+\color none
+
+\begin_inset Formula $x$
+\end_inset
+
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\noun default
+\color inherit
+, le nombre de moles d’un sel à peser et 
+\begin_inset Formula $MMx$
+\end_inset
+
+, sa masse molaire.
+ La quantité de ce sel en grammes, 
+\begin_inset Formula $y$
+\end_inset
+
+, sera égale à :
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+y(\mathrm{g})=x(\mathrm{mol})\cdot Mmx(\mathrm{g\cdot mo}\mathrm{l}^{-1})
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Calcul d'une molarité
+\series default
+ :
+\begin_inset Formula 
+\[
+C(\mathrm{mol\cdot L^{-1}})=N(\mathrm{mol})/V(\mathrm{L})
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Avec : 
+\begin_inset Formula $C$
+\end_inset
+
+ = concentration en molalité , 
+\begin_inset Formula $N$
+\end_inset
+
+ = Nombre de moles et 
+\begin_inset Formula $V$
+\end_inset
+
+ = Volume.
+\end_layout
+
+\begin_layout Paragraph
+
+\emph on
+Exemples de conversion
+\end_layout
+
+\begin_layout Itemize
+Soit 0.1 L de solution à 1M, la 
+\series bold
+quantité de molécules
+\series default
+ présente sera égale à :
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+N=C\cdot V=1\mathrm{mol\cdot L^{-1}}\times0.1\mathrm{L}=0.1\mathrm{mol}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Soit 2 moles d'un sel dissoutes dans 0.25 L de solution, la concentration
+ exprimée en molarité sera égale à :
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+C=N/V=2\mathrm{mol}/0.25\mathrm{L}=0.5\mathrm{mol\cdot L^{-1}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Préparation d’une solution 2 mol.L
+\begin_inset Formula $^{\text{-1}}$
+\end_inset
+
+ (= 2 M).
+ Il faudra ajouter 2 moles de sel pour chaque litre préparé.
+ Si la MM du sel est de 10 g.mol
+\begin_inset Formula $^{\text{-1}}$
+\end_inset
+
+, 2 mol * 10 g par litre d’eau = 20 g à peser.
+\end_layout
+
+\begin_layout Itemize
+Si la quantité à préparer est 0,5 L, 20 g * 0,5 L = 10 g à peser
+\end_layout
+
+\begin_layout Standard
+TODO De molarité à molinité : (1 - 0.001005 *S)
+\end_layout
+
+\begin_layout Subsubsection
+Calcul et conversion de concentrations dans seacarb
+\end_layout
+
+\begin_layout Standard
+Philippe propose une version améliorée, appelée 
+\begin_inset Flex CharStyle:Pkg
+status collapsed
+
+\begin_layout Plain Layout
+seacarb2
+\end_layout
+
+\end_inset
+
+.
+ Création d’un objet
+\begin_inset Flex CharStyle:Class
+status collapsed
+
+\begin_layout Plain Layout
+ swconc
+\end_layout
+
+\end_inset
+
+ dans R.
+ 1.2 mol/kg-soln Ca
+\begin_inset Formula $^{\text{++}}$
+\end_inset
+
+ dans une eau de mer (S, t, p) 1.2 : mesure, mol/kg-soln Ca
+\begin_inset Formula $^{\text{++}}$
+\end_inset
+
+ : métadonnées, (S, t, p) : propriétés de l’eau de mer, salinité, température
+ en °C et pression (0 bar en surface)
+\end_layout
+
+\begin_layout Subsubsection
+Préparation d'une solution de sel à molarité connue
+\end_layout
+
+\begin_layout Standard
+[un peu trop de texte, et je verrais plutôt des indications à l'aide de
+ pictogrammes, un peu comme les protocoles Merck...
+ mais il ne faut pas non plus perdre trop de temps sur ce genre de documents!]
+\end_layout
+
+\begin_layout Standard
+[points importants qui n'ont pas été évoqués: la qualité de l'eau utilisée
+ pour faire la solution, et le lavage de la verrerie]
+\end_layout
+
+\begin_layout Standard
+La préparation d’une solution à molarité connue est une étape cruciale pour
+ la bonne réalisation d’une expérience.
+ Il faut donc être très attentif à chacune des étapes.
+\end_layout
+
+\begin_layout Standard
+Qualité des sels définie par leur pureté, en fonction de l'usage (technique,
+ pur, très pur, pour analyse, normatom, ..).
+ Cette pureté reflète la quantité de contaminants présents à l'état de traces
+ dans le sel purifié.
+ Selon l'usage, il faudra donc vérifier ce que le sel convient.
+ Par exemple, ne pas utiliser un sel contenant trop de nitrates pour réaliser
+ une solution tampon si cette dernière servira ensuite à effectuer un dosage
+ des nitrates en trace !
+\end_layout
+
+\begin_layout Standard
+La pesée : la concentration à préparer est donnée en moles par litre de
+ solution (molarité).
+ La balance pèse en grammes.
+ La première étape consiste donc à convertir notre concentration dans la
+ bonne unité (voir plus haut).
+ La balance doit être disposée à plat : un niveau à bulle est présent sur
+ celle-ci pour le vérifier.
+ Il faut toujours vérifier la calibration de la balance, pour ne pas induire
+ d’erreurs de mesure (se renseigner auprès d’un 
+\begin_inset Quotes eld
+\end_inset
+
+habitué
+\begin_inset Quotes erd
+\end_inset
+
+ du laboratoire).
+ Les sels vont être pesés dans une nacelle, il est donc impératif de tarer
+ la balance avec la nacelle avant la pesée.
+ On ajoute ensuite la bonne quantité de sel dans cette nacelle, 
+\series bold
+proprement et sans en mettre à côté, cela va de soi
+\series default
+.
+ On ne remet jamais du sel prélevé dans son pot pour éviter toute contamination.
+ Faire bien attention aux chiffres significatifs : si une balance pèse au
+ mg près, il ne faut pas arrondir la pesée au dixième de g !
+\end_layout
+
+\begin_layout Standard
+Verser le sel dans un matras jaugé : une fois la bonne quantité de sel pesée,
+ elle peut être placée dans un matras jaugé.
+ Un matras permet de mesurer précisément un volume à l’aide d’un trait sur
+ celui-ci.
+ La température de la solution doit donc être proche de la température d’utilisa
+tion du matras (25°C dans la plupart des cas, spécifiée sur le matras; attention
+ au dégagement de chaleur lorsque certains sels se dissolvent dans le solvant!).
+ Le sel est placé dans le matras.
+ Dans la plupart des cas, il reste des cristaux sur la nacelle, qui peuvent
+ être placé, eux aussi, dans le matras à l’aide d’un jet à la pissette d’eau
+ distillée.
+ Après s’être assuré que TOUT le sel pesé est dans le matras, de l’eau distillée
+ peut être ajoutée jusqu’à approcher le trait.
+ On attend ensuite que le sel se dissolve entièrement, et que les bulles
+ qui apparaissent éventuellement sur les parois du matras s'évacuent.
+ On peut ensuite mettre au trait précautionneusement : la surface de la
+ solution formant un ménisque, c’est la base de celui-ci qui doit être alignée
+ sur le trait.
+\end_layout
+
+\begin_layout Standard
+Le matras jaugé est un outil de mesure et non de stockage, il conviendra
+ donc de stocker la nouvelle solution dans un récipient approprié, en y
+ indiquant la date de fabrication, si possible, une date de péremption,
+ la concentration obtenue, l’auteur, etc.
+ La solution sera stockée sous hotte si elle est toxique, au frigo si elle
+ est instable à plus haute température.
+\end_layout
+
+\begin_layout Standard
+Si la concentration à préparer est faible (cf.
+ faible masse de sel à peser), on préfèrera faire une solution mère de concentra
+tion plus forte, et diluer celle-ci ensuite.
+ Cette étape intermédiaire permet de ne pas faire d’erreurs de mesure liées
+ à la limite de précision de la balance.
+ Pour effectuer la dilution, on prélèvera une partie de la solution mère
+ avec une pipette jaugée.
+\end_layout
+
+\begin_layout Standard
+Utilisation d’une pipette jaugée : si la pesée des sels de la solution est
+ très importante, le prélèvement de la bonne quantité de celle-ci l’est
+ tout autant.
+ L’instrument de précision approprié est la pipette jaugée.
+ Mesurant un volume, la température de la solution doit aussi être adéquate
+ (25°C dans la plupart des cas, spécifiée sur la pipette).
+ On pipette la solution jusqu’à arriver au-dessus du trait de volume (utiliser
+ une poire spéciale si la solution est toxique ou corrosive!).
+ Ensuite, à l’aide du doigt, on laisse s’écouler le trop de solution, jusqu’à
+ arriver au trait, pipette maintenue en position verticale, et pointe de
+ la pipette reposant en biais sur une parois en verre.
+ La surface de la solution formant un ménisque, c’est la base de celui-ci
+ qui sera alignée sur le trait.
+ On peut ensuite laisser écouler la solution dans un récipient.
+ Le bout des pipettes jaugées est étudié de telle manière que le bon volume
+ de liquide s’écoule si l’extrémité de la pipette est disposée contre la
+ paroi du récipient, à 45°.
+ Des tests avec eau distillée et pesée peuvent être rapidement effectués
+ pour vérifier que l’utilisation de ces pipettes est bien comprise (ne pas
+ hésiter à demander à un collègue expérimenté).
+\end_layout
+
+\begin_layout Standard
+TODO : protocole correct à utiliser pour préparer une solution de sel à
+ molarité connue.
+ Bien insister sur l'utilisation d'une balance, d'un matras, d'une pipette
+ jaugée.
+ Mise à température de la solution et dissolution complète du sel avant
+ mise au trait, qualité d'eau et du sel.
+\end_layout
+
+\begin_layout Standard
+Solution à très faible concentration: faire une solution mère et diluer
+ 1 ou 2 fois.
+\end_layout
+
+\begin_layout Standard
+Calcul de quantité de sel à ajouter, calcul d'erreur...
+\end_layout
+
+\begin_layout Chapter
+Laboratory protocoles
+\end_layout
+
+\begin_layout Standard
+This section covers the various protocoles used at EcoNum lab.
+ TODO...
+\end_layout
+
+\begin_layout Section
+Measuring the alkalinity in seawater
+\end_layout
+
+\begin_layout Subsection
+Protocole de dosage précis
+\end_layout
+
+\begin_layout Standard
+Ce protocole utilise une burette automatique.
+ Une version rapide, mais moins précise est également utilisée au laboratoire
+ pour un check up de l'alcalinité dans les mésocosmes lorsque la précision
+ maximale n'est pas nécessaire (voire plus loin).
+\end_layout
+
+\begin_layout Subsubsection
+Préparation de l’échantillon
+\end_layout
+
+\begin_layout Standard
+Prélever au moins 15 mL d’échantillon pour chaque dosage.
+ Filtrer immédiatement l’échantillon sur une membrane type Millipore de
+ 0.22 μm si l’on suspecte que des particules calcaires solides sont également
+ présentes (conseillé dans tous les cas).
+ L’échantillon doit être dosé dans les 24 h.
+ Il peut être conservé au frigo à 4°C, mais ne peut pas être congelé.
+\end_layout
+
+\begin_layout Standard
+Relever également le pH (au centième d’unité près), la température (au dixième
+ d’unité près) et la salinité (au dixième d’unité près) pour calculer les
+ concentrations en diverses espèces chimiques dans l’eau.
+ La concentration en calcium dans l’eau doit également être déterminée avec
+ précision pour pouvoir calculer l’oméga aragonite/calcite de l’eau.
+\end_layout
+
+\begin_layout Subsubsection
+Matériel et réactifs
+\end_layout
+
+\begin_layout Standard
+Le dosage se fait à l’aide d’une burette automatique de type Schott Titronic
+ T200 ou Titronic Automatic équipée d’un module de dosage de 20 mL, et d’un
+ pH-mètre de type WTW 340i ou Consort P602 muni d’une sonde pH et d’une
+ sonde de température (ou électrode combinant les deux), tous deux reliés
+ à un PC sur lequel le logiciel de dosage fourni avec le package 
+\begin_inset Flex CharStyle:Pkg
+status collapsed
+
+\begin_layout Plain Layout
+econum
+\end_layout
+
+\end_inset
+
+ est installé.
+ La burette automatique est identifiée comme unité ‘01’ est est branchée
+ sur le port Com1 avec les paramètres suivants : vitesse = 2400 bauds, aucune
+ parité, 8 bits et 2 bits d’arrêt (autres paramètres pour la Titronic Automatic
+ => homogénéiser!).
+ Le pH-mètre est relié sur le port série Com2 ou Com3 avec les paramètres
+ suivants : vitesse = 4800 bauds, aucune parité, 8 bits et 2 bits d'arrêt,
+ détection de porteuse et protocole Xon/Xoff activés (vérifier paramètres
+ pour le Consort P602).
+ Le tout est complété d’un bras porte-électrode et d’un agitateur magnétique
+ surmonté d’une feuille de polystyrène expansé pour éviter de réchauffer
+ la solution pendant le titrage.
+\end_layout
+
+\begin_layout Standard
+La solution de titration est du HCl 0.0025 N préparée à partir de solution
+ mère HCl 0.1 N (ampoule spéciale de solution titrée diluée dans 1L d’eau
+ ultrapure).
+ Cette solution mère est diluée ensuite à 0.0025 N en pipetant 25 mL de la
+ solution mère dans un matras jaugé de 1000 mL.
+ De l’eau ultrapure est ajoutée au trait.
+ La solution mère se garde 6 mois dans un récipient hermétique, à 4°C et
+ à l’obscurité.
+ La solution diluée à 0.0025 N de HCl doit être utilisée dans les 3-4 semaines
+ qui suivent sa préparation.
+\end_layout
+
+\begin_layout Subsubsection
+Préparation de la burette
+\end_layout
+
+\begin_layout Itemize
+Remplir la burette d'une solution 0.0025 N de HCl fraîchement préparée et
+ homogénéiser la solution dans le piston.
+ Vérifier qu'il ne subsiste aucune bulle d'air dans ce même piston.
+ Rincer au moins 3 fois le piston de la burette automatique avec cette nouvelle
+ solution titrante avant de l’utiliser.
+\end_layout
+
+\begin_layout Itemize
+Etalonner l’électrode de pH avec des tampons NBS 6.87 et 4.01.
+ Utiliser de préférence des tampons en ampoule à usage unique.
+\end_layout
+
+\begin_layout Itemize
+Placer la pointe de la burette automatique, ainsi que les sondes dans le
+ l’eau distillée.
+ Lancer la procédure de préparation qui consiste à distribuer 0.1 mL de solution
+ titrante, et ensuite, de mettre la burette à zéro.
+\end_layout
+
+\begin_layout Subsubsection
+Dosage de l’alcalinité
+\end_layout
+
+\begin_layout Itemize
+Etalonner un becher de 50 mL (au mg près).
+ Y placer 10 mL de l’échantillon (qui doit être à température ambiante).
+ Peser le tout et noter le poids au mg près de l’échantillon.
+\end_layout
+
+\begin_layout Itemize
+Placer le becher et son échantillon sur l’agitateur magnétique.
+ Ajouter une puce et régler l’agitation de manière plutôt forte pour qu’un
+ léger vortex se forme à la surface afin de permettre un bon dégazage du
+ CO
+\begin_inset Formula $_{\text{2}}$
+\end_inset
+
+ formé.
+ Placer la sonde pH et la pointe de la burette de titration dans l’échantillon.
+\end_layout
+
+\begin_layout Itemize
+Entrer les paramètres dans le programme (échantillon, auteur, préfiltration,
+ poids d’échantillon, pH, température et salinité 
+\emph on
+in situ
+\emph default
+, bore, calcium, etc.).
+\end_layout
+
+\begin_layout Itemize
+Après stabilisation de la lecture du pH, lancer le dosage.
+ La fin du dosage est signalée par le programme.
+ S’il faut interrompre le tout à un moment quelconque, appuyez sur la touche
+ 
+\begin_inset Flex CharStyle:Kbd
+status collapsed
+
+\begin_layout Plain Layout
+Esc
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+Une fois le dosage effectué correctement, les données sont sauvegardées
+ dans la base de donnée des dosages du laboratoire.
+ [à faire, et également, une explication de la méthode à utiliser pour récupérer
+ des données à partir de cette base !]
+\end_layout
+
+\begin_layout Subsubsection
+Calculs
+\end_layout
+
+\begin_layout Standard
+[à remanier, et vérifier par rapport à la dernière version en date des équations
+]
+\end_layout
+
+\begin_layout Standard
+Le point d’équivalence du titrage complet de l’alcalinité est calculé par
+ régression linéaire sur 10 points de H
+\begin_inset Formula $^{\text{+}}$
+\end_inset
+
+ en fonction de mL de HCl ajouté.
+ Les H
+\begin_inset Formula $^{\text{+}}$
+\end_inset
+
+ correspondent à (
+\emph on
+V
+\emph default
+ + 
+\emph on
+V
+\begin_inset Formula $_{\text{T}}$
+\end_inset
+
+
+\emph default
+) * (10
+\begin_inset Formula $^{\text{-Ph}}$
+\end_inset
+
+) où 
+\emph on
+V
+\emph default
+ est le volume de l’échantillon et 
+\emph on
+V
+\emph default
+
+\begin_inset Formula $_{\text{T}}$
+\end_inset
+
+ est le volume de solution titrante ajouté.
+\end_layout
+
+\begin_layout Standard
+Le volume de l’échantillon 
+\emph on
+V
+\emph default
+ est calculé comme: 
+\emph on
+P
+\emph default
+ / (1 + (-0.15741 + 0.06793952*
+\emph on
+T
+\emph default
+ - 0.00909529*
+\emph on
+T
+\emph default
+
+\begin_inset Formula $^{\text{2}}$
+\end_inset
+
+ + 0.0001001685*
+\emph on
+T
+\emph default
+
+\begin_inset Formula $^{\text{3}}$
+\end_inset
+
+ - 0.000001120083*
+\emph on
+T
+\emph default
+
+\begin_inset Formula $^{\text{4}}$
+\end_inset
+
+ + 0.000000006536332*
+\emph on
+T
+\emph default
+
+\begin_inset Formula $^{\text{5}}$
+\end_inset
+
+ + (0.824493 - 0.0040899*
+\emph on
+T
+\emph default
+ + 0.000076438*
+\emph on
+T
+\emph default
+
+\begin_inset Formula $^{\text{2}}$
+\end_inset
+
+ - 0.00000082467*
+\emph on
+T
+\emph default
+
+\begin_inset Formula $^{\text{3}}$
+\end_inset
+
+ + 0.0000000053875*
+\emph on
+T
+\emph default
+
+\begin_inset Formula $^{\text{4}}$
+\end_inset
+
+)*S + (-0.00572466 + 0.00010227*
+\emph on
+T 
+\emph default
+- 0.0000016546*
+\emph on
+T
+\emph default
+
+\begin_inset Formula $^{\text{2}}$
+\end_inset
+
+) * 
+\emph on
+S
+\emph default
+
+\begin_inset Formula $^{\text{3/2}}$
+\end_inset
+
+ + 0.00048314*
+\emph on
+S
+\emph default
+
+\begin_inset Formula $^{\text{2}}$
+\end_inset
+
+) / 1000)
+\end_layout
+
+\begin_layout Standard
+où 
+\emph on
+P
+\emph default
+ est le poids de l’échantillon en g, 
+\emph on
+T
+\emph default
+ est le température en °C et 
+\emph on
+S
+\emph default
+ est la salinité.
+ 
+\end_layout
+
+\begin_layout Standard
+Connaissant l’équation de la droite de régression H
+\begin_inset Formula $^{\text{+}}$
+\end_inset
+
+ = 
+\emph on
+a
+\emph default
+.
+\emph on
+V
+\emph default
+
+\begin_inset Formula $_{\text{T}}$
+\end_inset
+
+ + 
+\emph on
+b
+\emph default
+, le volume titrant à l’équivalence, V
+\begin_inset Formula $_{\text{eq}}$
+\end_inset
+
+ est calculé comme –
+\emph on
+b
+\emph default
+/
+\emph on
+a
+\emph default
+.
+ En utilisant les constantes suivantes (à 1 atm) :
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+K
+\emph default
+H
+\begin_inset Formula $_{\text{2}}$
+\end_inset
+
+O (mol/kg) = 10^-(3441 / (273.15 +
+\emph on
+ T
+\emph default
+
+\begin_inset Formula $_{\text{in situ}}$
+\end_inset
+
+) + 2.241 - 0.09415*
+\emph on
+S
+\emph default
+
+\begin_inset Formula $_{\text{in situ}}$
+\end_inset
+
+
+\begin_inset Formula $^{\text{1/2}}$
+\end_inset
+
+) ≈ 2.41 · 10
+\begin_inset Formula $^{\text{-14}}$
+\end_inset
+
+,
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+K
+\emph default
+
+\begin_inset Formula $_{\text{0}}$
+\end_inset
+
+ (mol/atm) : exp(-60.2409 + 93.4517 * (100 / (273.15 + 
+\emph on
+T
+\emph default
+)) + 23.3585 * ln((273.15 + 
+\emph on
+T
+\emph default
+) / 100) + 
+\emph on
+S
+\emph default
+ * (0.023517 - 0.023656 * ((273.15 + 
+\emph on
+T
+\emph default
+) / 100) + 0.0047036 * ((273.15 + 
+\emph on
+T
+\emph default
+) / 100)
+\begin_inset Formula $^{\text{2}}$
+\end_inset
+
+)) ≈ 3.72 · 10
+\begin_inset Formula $^{\text{-2}}$
+\end_inset
+
+,
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+K
+\emph default
+
+\begin_inset Formula $_{\text{1}}$
+\end_inset
+
+ (mol/kg) : 10^-((19.894 - 840.39 / (273.15 + 
+\emph on
+T
+\emph default
+) - 3.0189 * ln(273.15 + 
+\emph on
+T
+\emph default
+)) *
+\emph on
+ S
+\emph default
+
+\begin_inset Formula $^{\text{1/2}}$
+\end_inset
+
+ + 0.00679 * 
+\emph on
+S
+\emph default
+ + 6320.81/(273.15 + 
+\emph on
+T
+\emph default
+) - 126.3405 + 19.568 * ln(273.15 + 
+\emph on
+T
+\emph default
+)) ≈ 1.13 · 10
+\begin_inset Formula $^{\text{-6}}$
+\end_inset
+
+,
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+K
+\emph default
+
+\begin_inset Formula $_{\text{2}}$
+\end_inset
+
+ (mol/kg) : 10^-((17.176 - 690.59 / (273.15 + 
+\emph on
+T
+\emph default
+) - 2.6719 * ln(273.15 + 
+\emph on
+T
+\emph default
+)) * 
+\emph on
+S
+\emph default
+
+\begin_inset Formula $^{\text{1/2}}$
+\end_inset
+
+ + 0.02169 * 
+\emph on
+S
+\emph default
+ + 5143.69 / (273.15 + 
+\emph on
+T
+\emph default
+) - 90.1833 + 14.613 * ln(273.15 + 
+\emph on
+T
+\emph default
+)) ≈ 7.81 · 10
+\begin_inset Formula $^{\text{-10}}$
+\end_inset
+
+,
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+K
+\emph default
+B (mol/kg) : exp((0.5998 - 75.25 / (273.15 + 
+\emph on
+T
+\emph default
+)) * 
+\emph on
+S
+\emph default
+
+\begin_inset Formula $^{\text{1/2}}$
+\end_inset
+
+ - 0.01767 * 
+\emph on
+S
+\emph default
+ + 148.0248 - 8966.9 / (273.15 + 
+\emph on
+T
+\emph default
+) - 24.4344 * ln(273.15 + 
+\emph on
+T
+\emph default
+)) ≈ 1.87 · 10
+\begin_inset Formula $^{\text{-9}}$
+\end_inset
+
+,
+\end_layout
+
+\begin_layout Standard
+on obtient :
+\end_layout
+
+\begin_layout Itemize
+Gamma = -0.15741 + 0.06793952*
+\emph on
+T
+\emph default
+ - 0.00909529*
+\emph on
+T
+\emph default
+
+\begin_inset Formula $^{\text{2}}$
+\end_inset
+
+ + 0.0001001685*
+\emph on
+T
+\emph default
+
+\begin_inset Formula $^{\text{3}}$
+\end_inset
+
+ - 0.000001120083*
+\emph on
+T
+\emph default
+
+\begin_inset Formula $^{\text{4}}$
+\end_inset
+
+ + 0.000000006536332*
+\emph on
+T
+\emph default
+
+\begin_inset Formula $^{\text{5}}$
+\end_inset
+
+ + (0.824493 - 0.0040899*
+\emph on
+T
+\emph default
+ + 0.000076438*
+\emph on
+T
+\emph default
+
+\begin_inset Formula $^{\text{2}}$
+\end_inset
+
+ - 0.00000082467*
+\emph on
+T
+\emph default
+
+\begin_inset Formula $^{\text{3}}$
+\end_inset
+
+ + 0.0000000053875*
+\emph on
+T
+\emph default
+
+\begin_inset Formula $^{\text{4}}$
+\end_inset
+
+)*S + (-0.00572466 + 0.00010227*
+\emph on
+T 
+\emph default
+- 0.0000016546*
+\emph on
+T
+\emph default
+
+\begin_inset Formula $^{\text{2}}$
+\end_inset
+
+) * 
+\emph on
+S
+\emph default
+
+\begin_inset Formula $^{\text{3/2}}$
+\end_inset
+
+ + 0.00048314*
+\emph on
+S
+\emph default
+
+\begin_inset Formula $^{\text{2}}$
+\end_inset
+
+ = environ 24 kg/m
+\begin_inset Formula $^{\text{3}}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+A
+\begin_inset Formula $_{\text{T}}$
+\end_inset
+
+ (meq/kg) = 
+\emph on
+V
+\emph default
+
+\begin_inset Formula $_{\text{eq}}$
+\end_inset
+
+ * titre HCl / 
+\emph on
+P
+\emph default
+ * 1000
+\end_layout
+
+\begin_layout Itemize
+A
+\begin_inset Formula $_{\text{C}}$
+\end_inset
+
+ (meq/kg) = (A
+\begin_inset Formula $_{\text{T}}$
+\end_inset
+
+/1000 - 0.000012 *
+\emph on
+ S
+\emph default
+ *
+\emph on
+ K
+\emph default
+B / (H
+\begin_inset Formula $^{\text{+}}$
+\end_inset
+
+
+\begin_inset Formula $_{\text{sws}}$
+\end_inset
+
+ + 
+\emph on
+K
+\emph default
+B) - 
+\emph on
+K
+\emph default
+H
+\begin_inset Formula $_{\text{2}}$
+\end_inset
+
+O / H
+\begin_inset Formula $^{\text{+}}$
+\end_inset
+
+
+\begin_inset Formula $_{\text{sws}}$
+\end_inset
+
+ + H
+\begin_inset Formula $^{\text{+}}$
+\end_inset
+
+
+\begin_inset Formula $_{\text{sws}}$
+\end_inset
+
+) * 1000
+\end_layout
+
+\begin_layout Itemize
+SumCO
+\begin_inset Formula $_{\text{2}}$
+\end_inset
+
+ = [CO
+\begin_inset Formula $_{\text{2}}$
+\end_inset
+
+] + [HCO
+\begin_inset Formula $_{\text{3}}$
+\end_inset
+
+
+\begin_inset Formula $^{\text{-}}$
+\end_inset
+
+] + [CO
+\begin_inset Formula $_{\text{3}}$
+\end_inset
+
+
+\begin_inset Formula $^{\text{2-}}$
+\end_inset
+
+]
+\end_layout
+
+\begin_layout Itemize
+B
+\begin_inset Formula $_{\text{T}}$
+\end_inset
+
+ = 0.000012 * 
+\emph on
+S
+\end_layout
+
+\begin_layout Itemize
+PCO
+\begin_inset Formula $_{\text{2}}$
+\end_inset
+
+ (atm) = [CO
+\begin_inset Formula $_{\text{2}}$
+\end_inset
+
+] / 
+\emph on
+K
+\emph default
+
+\begin_inset Formula $_{\text{0}}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+[CO
+\begin_inset Formula $_{\text{2}}$
+\end_inset
+
+] = [HCO
+\begin_inset Formula $_{\text{3}}$
+\end_inset
+
+
+\begin_inset Formula $^{\text{-}}$
+\end_inset
+
+] / 
+\emph on
+K
+\emph default
+
+\begin_inset Formula $_{\text{1}}$
+\end_inset
+
+ * H
+\begin_inset Formula $^{\text{+}}$
+\end_inset
+
+
+\begin_inset Formula $_{\text{sws}}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+[HCO
+\begin_inset Formula $_{\text{3}}$
+\end_inset
+
+
+\begin_inset Formula $^{\text{-}}$
+\end_inset
+
+] = AC / 1000 / (1 + 2 * 
+\emph on
+K
+\emph default
+
+\begin_inset Formula $_{\text{2}}$
+\end_inset
+
+ / H
+\begin_inset Formula $^{\text{+}}$
+\end_inset
+
+
+\begin_inset Formula $_{\text{sws}}$
+\end_inset
+
+)
+\end_layout
+
+\begin_layout Itemize
+[CO
+\begin_inset Formula $_{\text{3}}$
+\end_inset
+
+
+\begin_inset Formula $^{\text{2-}}$
+\end_inset
+
+] = [HCO
+\begin_inset Formula $_{\text{3}}$
+\end_inset
+
+
+\begin_inset Formula $^{\text{-}}$
+\end_inset
+
+] * 
+\emph on
+K
+\emph default
+
+\begin_inset Formula $_{\text{2}}$
+\end_inset
+
+ / H
+\begin_inset Formula $^{\text{+}}$
+\end_inset
+
+
+\begin_inset Formula $_{\text{sws}}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+[B(OH)
+\begin_inset Formula $_{\text{3}}$
+\end_inset
+
+] = B
+\begin_inset Formula $_{\text{T}}$
+\end_inset
+
+ – [B(OH)
+\begin_inset Formula $_{\text{4}}$
+\end_inset
+
+
+\begin_inset Formula $^{\text{-}}$
+\end_inset
+
+]
+\end_layout
+
+\begin_layout Itemize
+[B(OH)
+\begin_inset Formula $_{\text{4}}$
+\end_inset
+
+
+\begin_inset Formula $^{\text{-}}$
+\end_inset
+
+] = B
+\begin_inset Formula $_{\text{T}}$
+\end_inset
+
+ * 
+\emph on
+K
+\emph default
+B / (
+\emph on
+K
+\emph default
+B + H
+\begin_inset Formula $^{\text{+}}$
+\end_inset
+
+
+\begin_inset Formula $_{\text{sws}}$
+\end_inset
+
+)
+\end_layout
+
+\begin_layout Itemize
+[H
+\begin_inset Formula $^{\text{+}}$
+\end_inset
+
+]
+\begin_inset Formula $_{\text{sws}}$
+\end_inset
+
+ = (10^-(pH
+\begin_inset Formula $_{\text{nbs in situ}}$
+\end_inset
+
+ + 0.076)) * (1 + 12 * 0.0008066 * 
+\emph on
+S
+\emph default
+) * (1000 - 
+\emph on
+S
+\emph default
+) / 1000
+\end_layout
+
+\begin_layout Itemize
+pH
+\begin_inset Formula $_{\text{sws}}$
+\end_inset
+
+ = -log((10^-(pH
+\begin_inset Formula $_{\text{nbs in situ}}$
+\end_inset
+
+ + 0.076)) * (1 + 12 * 0.0008066 * 
+\emph on
+S
+\emph default
+) * (1000 - 
+\emph on
+S
+\emph default
+) / 1000)
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Exemple de valeurs
+\emph default
+:
+\end_layout
+
+\begin_layout Itemize
+P = 61.36 g,
+\end_layout
+
+\begin_layout Itemize
+V
+\begin_inset Formula $_{\text{eq}}$
+\end_inset
+
+ = 15.37 mL,
+\end_layout
+
+\begin_layout Itemize
+HCl = 0.01 N,
+\end_layout
+
+\begin_layout Itemize
+a = 0.00808,
+\end_layout
+
+\begin_layout Itemize
+b = -0.12413,
+\end_layout
+
+\begin_layout Itemize
+S = 32.90,
+\end_layout
+
+\begin_layout Itemize
+Gamma= 24.223,
+\end_layout
+
+\begin_layout Itemize
+T = 15.60°C,
+\end_layout
+
+\begin_layout Itemize
+pH
+\begin_inset Formula $_{\text{nbs in situ}}$
+\end_inset
+
+ = 7.71,
+\end_layout
+
+\begin_layout Itemize
+A
+\begin_inset Formula $_{\text{T}}$
+\end_inset
+
+ = 2.504 meq/kg,
+\end_layout
+
+\begin_layout Itemize
+A
+\begin_inset Formula $_{\text{C}}$
+\end_inset
+
+ = 2.471 meq/kg,
+\end_layout
+
+\begin_layout Itemize
+SumCO
+\begin_inset Formula $_{\text{2}}$
+\end_inset
+
+ = 2.43 · 10
+\begin_inset Formula $^{\text{-3}}$
+\end_inset
+
+,
+\end_layout
+
+\begin_layout Itemize
+B
+\begin_inset Formula $_{\text{T}}$
+\end_inset
+
+ = 3.95 · 10
+\begin_inset Formula $^{\text{-4}}$
+\end_inset
+
+,
+\end_layout
+
+\begin_layout Itemize
+PCO
+\begin_inset Formula $_{\text{2}}$
+\end_inset
+
+ = 1.14 · 10
+\begin_inset Formula $^{\text{-3}}$
+\end_inset
+
+ atm,
+\end_layout
+
+\begin_layout Itemize
+[CO
+\begin_inset Formula $_{\text{2}}$
+\end_inset
+
+] = 4.25 · 10
+\begin_inset Formula $^{\text{-5}}$
+\end_inset
+
+,
+\end_layout
+
+\begin_layout Itemize
+[HCO
+\begin_inset Formula $_{\text{3}}$
+\end_inset
+
+
+\begin_inset Formula $^{\text{-}}$
+\end_inset
+
+] = 2.30 · 10
+\begin_inset Formula $^{\text{-3}}$
+\end_inset
+
+,
+\end_layout
+
+\begin_layout Itemize
+[CO
+\begin_inset Formula $_{\text{3}}$
+\end_inset
+
+
+\begin_inset Formula $^{\text{2-}}$
+\end_inset
+
+] = 8.60 · 10
+\begin_inset Formula $^{\text{-5}}$
+\end_inset
+
+,
+\end_layout
+
+\begin_layout Itemize
+[B(OH)
+\begin_inset Formula $_{\text{3}}$
+\end_inset
+
+] = 3.62 · 10
+\begin_inset Formula $^{\text{-4}}$
+\end_inset
+
+,
+\end_layout
+
+\begin_layout Itemize
+[B(OH)
+\begin_inset Formula $_{\text{4}}$
+\end_inset
+
+
+\begin_inset Formula $^{\text{-}}$
+\end_inset
+
+] = 3.24 · 10
+\begin_inset Formula $^{\text{-5}}$
+\end_inset
+
+,
+\end_layout
+
+\begin_layout Itemize
+[H
+\begin_inset Formula $^{\text{+}}$
+\end_inset
+
+]
+\begin_inset Formula $_{\text{sws}}$
+\end_inset
+
+ = 2.09 · 10
+\begin_inset Formula $^{\text{-8}}$
+\end_inset
+
+,
+\end_layout
+
+\begin_layout Itemize
+pH
+\begin_inset Formula $_{\text{sws}}$
+\end_inset
+
+ = 7.68
+\end_layout
+
+\begin_layout Subsection
+Protocole de dosage rapide
+\end_layout
+
+\begin_layout Standard
+[TODO, baser ce protocole sur le test Salifert… mais avec pesée de l’échantillon
+ et à la fin de la titration + étalonnage de la solution titrante pour plus
+ de précision].
+\end_layout
+
+\begin_layout Subsection
+Références
+\end_layout
+
+\begin_layout Standard
+[refs TODO!].
+\end_layout
+
+\begin_layout Section
+Measuring zooxanthellae with the FlowCAM
+\end_layout
+
+\begin_layout Standard
+TODO: make the protocole here.
+ The following part is just a transcript of instructions received from Fluid
+ Imaging...
+\end_layout
+
+\begin_layout Subsection
+Operation of the FlowCAM using a 50 um Flow cell
+\end_layout
+
+\begin_layout Standard
+For processing samples within 15-20 min using a 20x objective and 50 µm
+ flowcell:
+\end_layout
+
+\begin_layout Enumerate
+Shorten the length of the tubing between the funnel and the flow cell as
+ much as possible (~1cm).
+\end_layout
+
+\begin_layout Enumerate
+If possible use a smaller funnel with a narrow base (less overall volume
+ – one possible idea would be to cut the top end of a disposable plastic
+ pipet that has a very narrow stem diameter).
+\end_layout
+
+\begin_layout Enumerate
+Add the sample and set the pump to PRIME.
+\end_layout
+
+\begin_layout Enumerate
+Once the sample has reached the flow cell, process the sample using autotrigger
+ mode for the necessary period of time (~5-10 mins).
+\end_layout
+
+\begin_layout Enumerate
+Once the run has finished, remove excess sample in the funnel with a pipet
+ (disposable), add and rinse funnel with filtered seawater.
+ Have the pump set to prime.
+ Rinse funnel with filtered seawater and continue to remove fluid from the
+ funnel while the pump is priming with a pipet – continue for 30 seconds
+ until FSW has entered the 50 µm depth flow cell.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Remove the FSW from the funnel to the neck of the funnel.
+ Add your next sample and prime the pump once again until the sample has
+ entered the flow cell (monitor using setup and focus), then begin to run
+ the next sample.
+\end_layout
+
+\begin_layout Enumerate
+With a 5-10 min run using autotrigger, and these rinsing techniques the
+ processing time of each sample should be approximately 15-20 minutes.
+\end_layout
+
+\begin_layout Chapter
+Computer control of scientific devices
+\end_layout
+
+\begin_layout Standard
+At EcoNum, we use scientific devices connected to computers as much as possible.
+ On one hand, it allows great flexibility in automatizing even complex tasks
+ by writing computer programs to pilot the scientific devices, and in the
+ other hand, it is fast and reliable to collect data from instruments directly
+ into the computer as much as possible.
+ When you take note of your measurements, then introduce them manually in
+ the computer, you waste your time, but there is also a possibility to make
+ mistakes when you copy the data.
+\end_layout
+
+\begin_layout Standard
+First few sections deal will basic interfaces management (ph-meters, controller
+ cards, scales, etc.), and following sections cover more elaborate implementation
+s like the automatic titration procedures, and the chemostat.
+\end_layout
+
+\begin_layout Section
+The parallel interface card
+\end_layout
+
+\begin_layout Standard
+The parallel interface card is very simple to pilot.
+ It is plugged to the computer with a parallel cable and it allows to master
+ eight channels (with relays) corresponding to the eight bits of a byte.
+ Thus, sending one byte to the card through the parallel cable instruct
+ to open (bit is 1) or close (bit is 0) respective channels.
+ The 
+\begin_inset Flex CharStyle:Pkg
+status collapsed
+
+\begin_layout Plain Layout
+econum
+\end_layout
+
+\end_inset
+
+ package contains functions to pilot that card through a special LPT driver
+ under Tcl/Tk.
+ This driver is only working under Windows 95 -> XP.
+ The card must be connected to usual LPT1, LPT2, or LPT3 parallel ports
+ (no exotic parallel ports supported yet).
+ It use is very simple through the unique 
+\begin_inset Flex CharStyle:Code
+status collapsed
+
+\begin_layout Plain Layout
+para()
+\end_layout
+
+\end_inset
+
+ function.
+ Basically, you specify a vector of eight logicals inducating the state
+ of each channel you want, the parallel port where the card is connected
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+It is much more convenient to use the 
+\begin_inset Flex Code
+status collapsed
+
+\begin_layout Plain Layout
+options(par.port = X)
+\end_layout
+
+\end_inset
+
+ instruction before using 
+\begin_inset Flex Code
+status collapsed
+
+\begin_layout Plain Layout
+para()
+\end_layout
+
+\end_inset
+
+, where 
+\begin_inset Flex Code
+status collapsed
+
+\begin_layout Plain Layout
+X
+\end_layout
+
+\end_inset
+
+ is the parallel port 1, 2 or 3.
+ So that, you set up the port once and you do not need to specify it again
+ and again each time you call 
+\begin_inset Flex Code
+status collapsed
+
+\begin_layout Plain Layout
+para()
+\end_layout
+
+\end_inset
+
+ (see the example).
+\end_layout
+
+\end_inset
+
+, and you change the state of the card instantly.
+ Additionally, you can specify the argument 
+\begin_inset Flex CharStyle:Code
+status collapsed
+
+\begin_layout Plain Layout
+change = FALSE
+\end_layout
+
+\end_inset
+
+ and in this case, the function does not change the state of the eight channels
+ but it reads the current state of the card.
+ Here is an example:
+\end_layout
+
+\begin_layout R-Chunk
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+<<eval = FALSE>>=
+\end_layout
+
+\begin_layout Plain Layout
+
+options(para.port = 1)	# If your card is connected to LPT1
+\end_layout
+
+\begin_layout Plain Layout
+
+para(c(T,F,F,T,F,F,F,T))  # Channels 1, 4, 8 ON, the others OFF
+\end_layout
+
+\begin_layout Plain Layout
+
+para(change = FALSE)      # Read current state
+\end_layout
+
+\begin_layout Plain Layout
+
+para(c(F,F,F,F,F,F,F,F))  # All channels OFF
+\end_layout
+
+\begin_layout Plain Layout
+
+para(change = FALSE)      # Make sure current state is changed
+\end_layout
+
+\begin_layout Plain Layout
+
+@
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Chapter
+Annexes
+\end_layout
+
+\begin_layout Section
+A couple of recommendations
+\end_layout
+
+\begin_layout Itemize
+Be consistent with the spelling of your name in all your scientific literature.
+ In particular, decide if you indicate initial al middle name(s) or not,
+ consistently (J.
+ Doe 
+\emph on
+versus
+\emph default
+ J.F.
+ Doe).
+ Changing this from paper to paper makes it difficult to follow your work
+ and you will be listed under different authors in the online databases.
+\end_layout
+
+\begin_layout Itemize
+Choose a scientific journal 
+\emph on
+before
+\emph default
+ you write your paper.
+ Make sure to read which topics the journal covers and to write your paper
+ accordingly.
+ Read carefully author's instructions and follow them from the beginning.
+\end_layout
+
+\begin_layout Itemize
+Always check copyright policies of the journals you submit paper, and later
+ on, when you want to send reprints (possibly in PDF format) or publish
+ them on Web sites.
+ It is not always possible to do so.
+ Sometimes, you can only publish the summary, but not the full paper.
+ If you want to diffuse a work largely and easily (a white paper whose goal
+ would be to be accessible by everybody, for instance), choose a publisher
+ that allows you to freely publish it on the Web.
+\end_layout
+
+\begin_layout Itemize
+Make sure all your scientific literature (from the most confidential internal
+ note or report to published books) has page numbers, correct and complete
+ references, author names, date, and possibly, version, ISBN, or copyright
+ information if required.
+\end_layout
+
+\begin_layout Itemize
+Usual rules for page numbering is to number 
+\emph on
+every
+\emph default
+ page (even blank ones) and start at one for the recto of first printed
+ page in arabic numerals.
+ Table of contents and index may be numbered separately, possibly in roman
+ numerals to avoid confusion.
+ When you decide how to number your pages, consider if your work will be
+ delivered as a PDF.
+ In this case, it is much better to decide to number all pages in a single
+ sequence with arabic numerals, starting at one from the title page.
+ That way, page numbering will be the same as the page number displayed
+ in, say, Adobe Acrobat Reader or GostView.
+ The LaTeX styles 
+\begin_inset Quotes eld
+\end_inset
+
+article
+\begin_inset Quotes erd
+\end_inset
+
+ and 
+\begin_inset Quotes eld
+\end_inset
+
+report
+\begin_inset Quotes erd
+\end_inset
+
+ do this by default, but not the 
+\begin_inset Quotes eld
+\end_inset
+
+book
+\begin_inset Quotes erd
+\end_inset
+
+ style, for instance.
+\end_layout
+
+\begin_layout Itemize
+To distribute your work online, always prefer Adobe's Portable Document
+ Format (PDF).
+ Even for presentations, like those produced with Microsoft Powerpoint,
+ do prefer PDF for distribution, but take care that complex transitions
+ and animations are lost (it is always better to avoid them, when possible,
+ in presentations)!
+\end_layout
+
+\begin_layout Itemize
+When converting your document to PDF, always keep in mind the following
+ points: (1) will your vector drawings be converted into raster images,
+ and if so, how would they look like on screen and printed? (2) What resolution
+ for images shall you choose? The optimal one is different for documents
+ to be viewed on screen or to be printed.
+ If you need both, consider something like 150
+\begin_inset space \thinspace{}
+\end_inset
+
+dpi, which is often a good compromize, but test the PDF to get an idea of
+ the result, both on screen and after printing it on a good laser and a
+ good inkjet printers.
+ (3) The 
+\emph on
+shrink to fit
+\emph default
+ function in Adobe Acrobat Reader is nice for printing non-ISO paper size,
+ and in particular to cope with little difference between standard A4 format
+ and North American Letter format.
+ (4) PDF uses built-in compression.
+ Document are often smaller than in their original format (especially if
+ you embed large images in them), after choosing a reasonable resolution
+ of course (see point 2).
+ You don't need to zip, or compress the PDF with another mean, and the gain
+ would be marginal.
+ (5) Make sure your PDF converter creates a readable table of contents,
+ and can manage hyperlinks (URLs, but also internal cross-references, links
+ to titles in the document from the table of content, and links to corresponding
+ pages in the index.
+ Not all PDF converters take this into account, especially those using a
+ virtual printer driver.
+ OpenOffice converter does a good job, as well as Adobe Acrobat Distiller
+ for Microsoft Office documents, and LaTeX when using the 
+\series bold
+hyperref
+\series default
+ package.
+ (6) Always check if the fonts you use are available and look for the possibilit
+y to embed most exotic fonts in your document (display the PDF on a machine
+ that does not have that font installed).
+ (7) Some old PDF converters, like Ghostscript < 6.5 lack support for Type1
+ fonts and transform exotic fonts into ugly raster representations.
+ Take care of this and consider a different converter if you notice an obvious
+ degradation of the font in the final PDF document.
+ (8) Does your PDF converter and reader manage to get good-looking anti-aliased
+ images, especially for your vector drawings? Not all couples of converters/read
+ers do this.
+ If you have a reader that does not anti-alias text and images, try to find
+ one that does it: it dramatically increases the readability of your document,
+ especially on low-resolution screens.
+ (9) Look at metadata (title, author, keywords, etc.) embedded in your PDF
+ document.
+ Are these correct and up-to-date? If not, look in the documentation of
+ your PDF converter to determine how you can change this (but it usually
+ takes the data from the 
+\emph on
+properties
+\emph default
+ defined for the initial document.
+ (10) Use appropriate format for all your pictures.
+ A vector graphic format (SVG, WMF/EMF, PDF, ...) is better for diagrams and
+ graphs.
+ A raster format should be used for the others.
+ There are two types of raster formats: those who compress data without
+ lost of information (GIF, PNG, ...) that are most suitable for screenshots
+ or any images containing text and large areas of uniform colors with sharp
+ edges, and those with lossy compression (typically JPeG) that do an excellent
+ job with maximum compression for photos that have to be viewed unmodified
+ by humans.
+ Even for photos, do not use JPeG if the image must be modified, or some
+ measurements need to be done on them using an image analysis software.
+ Check the number of colors or gray levels the format can handle.
+ In particular, avoid GIF format if you need more than 256 different colors
+ in your image.
+ Take care that many distillers use a JPeG compression for 
+\emph on
+all
+\emph default
+ images in your document.
+ There is a little script 
+\begin_inset CommandInset href
+LatexCommand href
+name "here"
+target "http://www.cl.cam.ac.uk/~mgk25/publ-tips/"
+
+\end_inset
+
+ that deactivates JPeG compression for selected images in the process of
+ creating a PDF.
+\end_layout
+
+\begin_layout Itemize
+You can test your PDF converter/distiller and reader with the 
+\begin_inset CommandInset href
+LatexCommand href
+name "testflow"
+target "http://www.ctan.org/tex-archive/macros/latex/contrib/IEEEtran/testflow/"
+
+\end_inset
+
+ document if you use TeX.
+ That document contains a series of commands and features that are known
+ to cause problems in the production os a PDF version of your LaTeX work.
+\end_layout
+
+\begin_layout Itemize
+Always think at your production chain and consider solutions that are 
+\emph on
+traceable
+\emph default
+ and 
+\emph on
+reproducible
+\emph default
+.
+ Here are a couple of recommendations.
+ 
+\end_layout
+
+\end_body
+\end_document

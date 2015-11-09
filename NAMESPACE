@@ -1,0 +1,50 @@
+import(tcltk, svMisc) #, chemCal)
+#importFrom(MASS, rlm)
+
+export(newEcoNumData,
+       validate,
+       reposSave,
+       reposLoad,
+       optionsEcoNum,
+       getOptEcoNum,
+       setOptEcoNum,
+       timeToFingerprint,
+       fingerprintToTime,
+       gce8Close,
+       gce8Cmd,
+       gce8Get,
+       gce8List,
+       gce8Name,
+       gce8Open,
+       gce8Port,
+       gce8Ready,
+       gce8Relays,
+       gce8Set,
+       iks.cmd,
+       iks.close,
+       iks.getAll,
+       iks.getConfig,
+       iks.getData,
+       iks.getName,
+       iks.info,
+       iks.open,
+       iks.process,
+       iks.setData,
+       para,
+       wtw.open,
+       wtw.close,
+       wtw.ready,
+       wtw.info,
+       wtw.cmd,
+       wtw.echo,
+       wtw.read,
+       wtw.record,
+       wtw.sim)
+
+S3method(print, IKSData)
+
+S3method(print, EcoNumData)
+S3method(summary, EcoNumData)
+S3method(print, summary.EcoNumData)
+S3method(validate, EcoNumData)
+S3method(reposSave, EcoNumData)

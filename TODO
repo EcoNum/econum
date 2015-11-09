@@ -1,0 +1,11 @@
+= econum To Do list
+
+* Integrate the titration routines
+
+* Integrate the IKS monitoring routines
+
+* Create the chemostat controller
+
+* Integrate calculations used for quantification of PO4---, NO3-, etc.
+
+* Add chemostat functions
