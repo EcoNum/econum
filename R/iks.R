@@ -4,11 +4,11 @@ print.IKSData <- function (x, ...) {
 	cat(x$Name, ": IKS aquastar on ", x$Port, "\n", sep = "")
 	if (!is.null(x$Version))
 		cat("(reported as: ", x$Version, ")\n", sep = "")
-	
+
 	Itime <- x$Time["IKS"]
 	Ptime <- x$Time["Probes"]
 	Stime <- x$Time["Sockets"]
-	
+
 	if (!is.null(Ptime) && !is.na(Ptime)) {
 		if (!is.null(Itime) && !is.na(Itime)) {
 			# Check time lag between IKS and computer
@@ -61,7 +61,7 @@ print.IKSData <- function (x, ...) {
 		Alarm[x$Sockets$Alarm] <- "*"
 		# Take care that first saocket is at line #2 in the table!
 		cat("Name :", format(abbreviate(x$NamesSockets[1:8], 8), width = 8,
-			justify = "right"), "\n")		
+			justify = "right"), "\n")
 		cat("Ctrl :", format(abbreviate(x$Sockets$Control[2:9], 8), width = 8,
 			justify = "right"), "\n")
 		cat("State:", format(abbreviate(State[2:9], 8), width = 8,
@@ -94,7 +94,7 @@ print.IKSData <- function (x, ...) {
 		## If port is higher than 9,
 		## name must be \\\\\\\\.\\\\comXX under Windows
 		if (numport > 9) {
-			return(paste("\\\\\\\\.\\\\com", numport, sep =""))	
+			return(paste("\\\\\\\\.\\\\com", numport, sep =""))
 		} else {
 			return(paste("com", numport, sep = ""))
 		}
@@ -151,32 +151,32 @@ iks.process <- function (msg, iks.name = "IKS") {
 			Probes$Trigger[chan] <- trigger
 		}
         # Oxygen
-		if (regexpr("^E[1-8] [(]Ox", msg) == 1) {
+		if (regexpr("^E[1-8] [(][Oo]x", msg) == 1) {
 			chan <- as.numeric(sub("^E([1-8]).*$", "\\1", msg))
-			dat <- sub("^E[1-8] [(]Ox.[)]([0-9. ]*)[^0-9].*$", "\\1", msg)
+			dat <- sub("^E[1-8] [(][Oo]x.[)]([0-9. ]*)[^0-9].*$", "\\1", msg)
 			dat <- try(as.numeric(dat), silent = TRUE)
 			Probes$Type[chan] <- "O2"
 			Probes$Value[chan] <- dat
 			# Determines unit used
 			if (regexpr("% *$", msg) > 0)
 				Probes$Unit[chan] <- "%sat" else Probes$Unit[chan] <- "mg/L"
-			trigger <- sub("^E[1-8] [(]Ox(.)[)].*$", "\\1", msg)
+			trigger <- sub("^E[1-8] [(][Oo]x(.)[)].*$", "\\1", msg)
 			Probes$Trigger[chan] <- trigger
 		}
 		# Temperature
-        if (regexpr("^E[1-8] [(]Te", msg) == 1) {
+        if (regexpr("^E[1-8] [(][Tt]e", msg) == 1) {
 			chan <- as.numeric(sub("^E([1-8]).*$", "\\1", msg))
-			dat <- sub("^E[1-8] [(]Te.[)] ([^ ]*) .*$", "\\1", msg)
+			dat <- sub("^E[1-8] [(][Tt]e.[)] ([^ ]*) .*$", "\\1", msg)
 			dat <- try(as.numeric(dat), silent = TRUE)
 			Probes$Type[chan] <- "Te"
 			Probes$Value[chan] <- dat
 			if (regexpr("C *$", msg) > 0)
 				Probes$Unit[chan] <- "degC" else Probes$Unit[chan] <- "degF"
-			trigger <- sub("^E[1-8] [(]Te(.)[)].*$", "\\1", msg)
+			trigger <- sub("^E[1-8] [(][Tt]e(.)[)].*$", "\\1", msg)
 			Probes$Trigger[chan] <- trigger
 		}
 		# Pressure (both English and French version)
-        if (regexpr("^E[1-8] [(](AP|Ld)", msg) == 1) {
+        if (regexpr("^E[1-8] [(](AP|Ld|ap|ld)", msg) == 1) {
 			chan <- as.numeric(sub("^E([1-8]).*$", "\\1", msg))
 			dat <- sub("^E[1-8] [(]...[)] *([^ ]*) .*$", "\\1", msg)
 			dat <- try(as.numeric(dat), silent = TRUE)
@@ -187,7 +187,7 @@ iks.process <- function (msg, iks.name = "IKS") {
 			Probes$Trigger[chan] <- trigger
 		}
 		# Water level (both English and French version)
-        if (regexpr("^E[1-8] [(](Lv|Pe)", msg) == 1) {
+        if (regexpr("^E[1-8] [(](Lv|Pe|lv|pe)", msg) == 1) {
 			chan <- as.numeric(sub("^E([1-8]).*$", "\\1", msg))
 			dat <- sub("^E[1-8] [(]...[)] *([^ ]*).*$", "\\1", msg)
 			if (tolower(dat) == "air") dat <- 0 else dat <- 1
@@ -198,7 +198,7 @@ iks.process <- function (msg, iks.name = "IKS") {
 			Probes$Trigger[chan] <- trigger
 		}
 		# Conductivity (English)
-        if (regexpr("^E[1-8] [(](Co|Le)", msg) == 1) {
+        if (regexpr("^E[1-8] [(](Co|Le|co|le)", msg) == 1) {
 			chan <- as.numeric(sub("^E([1-8]).*$", "\\1", msg))
 			dat <- sub("^E[1-8] [(]...[)] *([^ ]*).*$", "\\1", msg)
 			dat <- try(as.numeric(dat), silent = TRUE)
@@ -211,7 +211,7 @@ iks.process <- function (msg, iks.name = "IKS") {
 			Probes$Trigger[chan] <- trigger
 		}
 		# Redox (English and untested!)
-        if (regexpr("^E[1-8] [(](Re|Rx|rH)", msg) == 1) {
+        if (regexpr("^E[1-8] [(](Re|Rx|rH|re|rx|rh)", msg) == 1) {
 			chan <- as.numeric(sub("^E([1-8]).*$", "\\1", msg))
 			dat <- sub("^E[1-8] [(]...[)] *([^ ]*).*$", "\\1", msg)
 			dat <- try(as.numeric(dat), silent = TRUE)
@@ -244,7 +244,7 @@ iks.process <- function (msg, iks.name = "IKS") {
 		}
 		Time[1] <- IKSdate
 		Time[2] <- Cdate
-		Data$Time <- Time 
+		Data$Time <- Time
 	} else if (regexpr("^aquastar", msg) > 0) {
 		# This is the identifier, as obtained with iks.info()
 		Data$Version <- msg
@@ -333,22 +333,22 @@ probes.names = paste("p0", 1:8, sep = ""),
 sockets.names = sprintf("s%02d", 1:16), procfun = iks.process) {
 	# This is the main function that starts the connection to one IKS aquastar
  	# IKSproc is the R workhorse function that do the computation
-	
+
 	iks.name <- as.character(iks.name[1])
-	
+
 	probes.names <- as.character(probes.names)
 	if (length(probes.names) != 8)
 		stop("'probes.names' must be a vector of eight names")
 	names(probes.names) <- paste("p0", 1:8, sep = "")
-	
+
 	sockets.names <- as.character(sockets.names)
 	if (length(sockets.names) != 16)
 		stop("'sockets.names' must be a vector of 16 names")
 	names(sockets.names) <- sprintf("s%02d", 1:16)
-	
+
 	is.function(procfun) || stop("'procfun' must be a function!")
     # Note: the data send by the IKS must be read from the Tcl $::IKSMsg variable
-	
+
 	# Make sure the com port is closed
 	port <- .iks.port(port)
 	item <- .iks.make.names(port)
@@ -359,7 +359,7 @@ sockets.names = sprintf("s%02d", 1:16), procfun = iks.process) {
 		proc <- as.character(proc[1])
 		return(length(as.character(tcl("info", "commands", proc))) == 1)
 	}
-	
+
     if (!tclProcExists("IKSProc")) {
 	    # Create the callback when a client sends data
 		"IKSProc" <- function () {
@@ -387,14 +387,14 @@ sockets.names = sprintf("s%02d", 1:16), procfun = iks.process) {
 			if (port == "") return(FALSE) # The connection with this IKS is closed
 			msg <- tclGetValue_("::IKSMsg")
 			if (msg == "") return(FALSE) # No message!
-			
+
 			# Make sure this message is not processed twice
 			.Tcl("set ::IKSMsg {}")
-			
+
 			# Do we have to debug IKS transactions
 			if (isTRUE(getOption("debug.IKS")))
 				cat("IKS on ", port, ": ", msg, "\n", sep = "")
-			
+
 			# The function that processes the client request is IKSProc_<item>
 			proc <- getTemp(paste("IKSProc", item, sep = "_"),
 				mode = "function")
@@ -466,8 +466,8 @@ sockets.names = sprintf("s%02d", 1:16), procfun = iks.process) {
 		" -mode \"9600,n,8,1\" -buffering line -blocking 0", sep = ""))
 	.Tcl(paste("fileevent $IKS_", item,
 		" readable [list IKSHandler_", item, " $IKS_", item, "]", sep = ""))
-	
-	# Add this port in the TempEnv variable 'IKSs$Devices'	
+
+	# Add this port in the TempEnv variable 'IKSs$Devices'
 	IKSs <- getTemp("IKSs")
 	Dev <- IKSs$Devices
 	namesDev <- names(Dev)
@@ -510,10 +510,10 @@ iks.close <- function (port = getOption("iks.port")) {
 				IKSs[[Name]] <- NULL
 				assignTemp("IKSs", IKSs)
   			}
-	
+
 			# Eliminate the processing function from TempEnv
 			rmTemp(paste("IKSProc", Item, sep = "_"))
-	
+
 			# Close the connection to the given IKS
 			try(.Tcl(paste("close $IKS_", Item, sep = "")), silent = TRUE)
 		}

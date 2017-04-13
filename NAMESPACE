@@ -1,4 +1,7 @@
 import(tcltk, svMisc) #, chemCal)
+importFrom("graphics", "axis", "grid", "legend", "lines", "mtext", "plot")
+importFrom("stats", "runif")
+importFrom("utils", "flush.console")
 #importFrom(MASS, rlm)
 
 export(newEcoNumData,

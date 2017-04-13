@@ -1,5 +1,10 @@
 = econum News
 
+== Changes in econum 1.1-6
+* iks.process() now also accepts lowercase names for probes (as of more recent
+  IKS aquastar devices provide them).
+
+
 == Changes in econum 1.1-5
 * In iks.open(), the Tcl proc installed to handle serial entries can lead to
   an error in Tcl while unsetting the corresponding variable in a very rare and
@@ -7,13 +12,13 @@
   and the USB port deconnects just in the middle of a communication. The unset
   command is now embedded into a catch { unset ....} construct to by-pass in
   this rare situation.
-  
+
 
 == Changes in econum 1.1-4
 * Code for gce8Cmd() is adapted to the new series of cards that implement the
   memory feature (M0/M1 instructions). If relay = NULL in gce8Cmd, then,
   memory state is changed.
-  
+
 
 == Changes in econum 1.1-3
 * IKS routines tested and adapted to Linux Ubuntu 11.10
@@ -23,7 +28,7 @@
 
 * Addition of timeFingerprint(), optionsEcoNum(), getOptEcoNum and
   setOptEcoNum() in utilities.R.
-  
+
 * Addition of EcoNumData object and related methods print(), summary(),
   validate(), reposSave(). Also addition of reposLoad() to reload some
   EcoNumData from the local or remote repository.
