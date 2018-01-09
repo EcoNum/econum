@@ -13,3 +13,4 @@ Maintainer: Philippe Grosjean <Philippe.Grosjean@umons.ac.be>
 License: file LICENSE
 LazyLoad: yes
 URL: http://econum.umons.ac.be/labo/
+Suggests: testthat
