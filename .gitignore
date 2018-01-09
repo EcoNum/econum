@@ -9,15 +9,14 @@
 
 # RStudio files
 .Rproj.user
+.Rproj.user/
 
 # C compilation files
 *.o
 src/*.o-*
 *.so
-
-# SVN files
-.svn
-.svn/*.*
+src/*.os
+src/*.dll
 
 # Mac files
 .DS_Store

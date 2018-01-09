@@ -1,15 +1,18 @@
 Package: econum
 Type: Package
-Title: various tools developed at EcoNum lab
-Depends: R (>= 2.10.0)
-Imports: tcltk, svMisc
+Title: Various Tools Developed at EcoNum Lab
 Description: Control of chemostats and titrators. Calculation routines for EcoNum lab.
 Version: 1.1-7
 Date: 2018-01-09
 Authors@R: c(person("Philippe", "Grosjean", role = c("aut", "cre"),
   email = "phgrosjean@sciviews.org"))
 Maintainer: Philippe Grosjean <Philippe.Grosjean@umons.ac.be>
+Depends: R (>= 2.10.0)
+Imports: tcltk, svMisc
+Suggests: testthat, covr, knitr
 License: MIT + file LICENSE
 LazyLoad: yes
-URL: http://econum.umons.ac.be/labo/
-Suggests: testthat, covr, knitr
+URL: https://github.com/EcoNum/econum, http://econum.umons.ac.be/
+BugReports: https://github.com/EcoNum/econum/issues
+LazyData: yes
+NeedsCompilation: no
