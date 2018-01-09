@@ -1,4 +1,4 @@
-# Test IKS aquaqtar nouvelle generation
+# Test IKS aquastar nouvelle generation
 library(econum)
 #ls /dev/cu*
 options(iks.port = "/dev/cu.usbserial-FTB3O67T")

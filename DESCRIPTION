@@ -3,14 +3,13 @@ Type: Package
 Title: various tools developed at EcoNum lab
 Depends: R (>= 2.10.0)
 Imports: tcltk, svMisc
-Description: Control of chemostats and titrators. Calculations routines for EcoNum lab.
-Version: 1.1-6
-Date: 2017-04-13
-Author: Philippe Grosjean [aut, cre]
+Description: Control of chemostats and titrators. Calculation routines for EcoNum lab.
+Version: 1.1-7
+Date: 2018-01-09
 Authors@R: c(person("Philippe", "Grosjean", role = c("aut", "cre"),
   email = "phgrosjean@sciviews.org"))
 Maintainer: Philippe Grosjean <Philippe.Grosjean@umons.ac.be>
 License: file LICENSE
 LazyLoad: yes
 URL: http://econum.umons.ac.be/labo/
-Suggests: testthat
+Suggests: testthat, covr, knitr
