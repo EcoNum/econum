@@ -9,7 +9,7 @@ Date: 2018-01-09
 Authors@R: c(person("Philippe", "Grosjean", role = c("aut", "cre"),
   email = "phgrosjean@sciviews.org"))
 Maintainer: Philippe Grosjean <Philippe.Grosjean@umons.ac.be>
-License: file LICENSE
+License: MIT + file LICENSE
 LazyLoad: yes
 URL: http://econum.umons.ac.be/labo/
 Suggests: testthat, covr, knitr
