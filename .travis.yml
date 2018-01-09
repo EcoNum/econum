@@ -15,8 +15,8 @@ branches:
   only:
     - master
 
-# Be strict when checking our package, but don't build the manual
-warnings_are_errors: true
+# Warnings are accepted... We don't intend to submit this to CRAN
+warnings_are_errors: false
 # Note: can also add --no-build-vignettes to both
 r_build_args: --no-manual --no-resave-data
 r_check_args: --as-cran
