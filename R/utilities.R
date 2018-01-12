@@ -202,19 +202,19 @@ set_opt_econum <- function(key, value) {
 #' (fp <- time_to_fingerprint(Sys.time()))
 #' fingerprint_to_time(fp) # Reverse process
 #' rm(fp)
-time_to_fingerprint <- function(Time) {
+time_to_fingerprint <- function(time, tz = "GMT") {
   # Calculate an hexadecimal "fingerprint" based on time (rounding down to sec)
-  toupper(as.hexmode(as.integer(Time)))
+  # Make sure time is expressed in UTC first
+  time <- as.POSIXct(as.character(time), tz = tz)
+  toupper(as.hexmode(as.integer(time)))
 }
 
 #' @export
 #' @rdname time_to_fingerprint
-fingerprint_to_time <- function(hexmode, tz = "") {
+fingerprint_to_time <- function(hexmode, tz = "GMT") {
   # Like with Sys.time(), it produces a POSIXct object with NULL tzone attribute
   # Fingerprint is always produced in UTC time!
   res <- as.POSIXct(strtoi(as.hexmode(hexmode), 16L),
-    origin = "1970-01-01 00:00.00", tz = "UTC")
-  # Eliminate tzone attribute to use default one instead
-  attr(res, "tzone") <- NULL
+    origin = "1970-01-01 00:00.00", tz = tz)
   res
 }
