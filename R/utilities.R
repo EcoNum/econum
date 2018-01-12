@@ -50,9 +50,44 @@ maxpos = 16, ...) {
   obj
 }
 
-optionsEcoNum <- function(opt) {
+#' Manage EcoNum options
+#'
+#' Examine, set or retrieve EcoNum-specific options.
+#'
+#' @param opt A list with all EcoNum options to set. Optional and if not
+#' provided, a default list is created at first use of `options_econum()`.
+#' @param key A character string with an option name.
+#' @param default Default (optional) value to return for the option, in case it
+#' is not defined.
+#' @param value Anything to set as an option in the list.
+#' @return For `options_econum()`, the whole list of options is returned. For
+#' the other functions, associated value (or default value) is returned.
+#' @author Philippe Grosjean \email{Philippe.Grosjean@@umons.ac.be}
+#' @export
+#' @seealso [EcoNumData], [time_to_fingerprint()]
+#' @keywords utilities
+#' @examples
+#' # Remote and local EcoNumData repositories
+#' get_opt_econum("local_repos")
+#' get_opt_econum("remote_repos")
+#'
+#' # Default general metadata
+#' get_opt_econum("def_project")
+#' get_opt_econum("def_sample")
+#' get_opt_econum("def_sample_date")
+#' get_opt_econum("def_author")
+#'
+#' # Get some non-existing EcoNum option
+#' get_opt_econum("nokey", default = "my default value")
+#' # Define it
+#' set_opt_econum("nokey", "some data")
+#' get_opt_econum("nokey", default = "my default value")
+#' # Eliminate this key
+#' set_opt_econum("nokey", NULL)
+#' get_opt_econum("nokey", default = "my default value")
+options_econum <- function(opt) {
   if (missing(opt)) { # Create it
-    opt <- getOption("EcoNum", default = list())
+    opt <- getOption("econum", default = list())
 
     # Repositories options
     # Default mapping for Windows is t:/EcoNumData
@@ -70,10 +105,10 @@ optionsEcoNum <- function(opt) {
     }
 
     # Default general metadata
-    opt$defProject <- "project00"
-    opt$defSample <- "test00"
-    opt$defSampleDate <- Sys.time()
-    opt$defAuthor <- "student"
+    opt$def_project <- "project00"
+    opt$def_sample <- "test00"
+    opt$def_sample_date <- Sys.time()
+    opt$def_author <- "student"
 
     # List of possible devices
     opt$titrators <- list(
@@ -116,12 +151,14 @@ optionsEcoNum <- function(opt) {
   }
 
   # Save these options in EcoNum
-  options(EcoNum = opt)
+  options(econum = opt)
   opt
 }
 
-getOptEcoNum <- function(key, default = NULL) {
-  opt <- getOption("EcoNum", default = optionsEcoNum())
+#' @export
+#' @rdname options_econum
+get_opt_econum <- function(key, default = NULL) {
+  opt <- getOption("econum", default = options_econum())
   if (missing(key)) {
     return(opt)
   } else {
@@ -132,19 +169,48 @@ getOptEcoNum <- function(key, default = NULL) {
   }
 }
 
-setOptEcoNum <- function(key, value) {
-  opt <- getOptEcoNum()
+#' @export
+#' @rdname options_econum
+set_opt_econum <- function(key, value) {
+  opt <- get_opt_econum()
   opt[[key]] <- value
-  optionsEcoNum(opt)
+  options_econum(opt)
   value
 }
 
-# Calculate an hexadecimal "fingerprint" based on time (rounding down to sec)
-timeToFingerprint <- function(Time)
-  toupper(as.hexmode(as.integer(Time)))
 
-# Like with Sys.time(), it produces a POSIXct object with NULL tzone attribute
-fingerprintToTime <- function(hexmode, tz = "") {
+#' Calculate fingerprint from time object, or the opposite
+#'
+#' Get an hexadecimal unique identifier corresponding to time an object is
+#' created. A time object from a hexadecimal fingerprint can be also obtained.
+#'
+#' @param Time A POSIXct object indicating time an `EcoNumData` object is
+#' created.
+#' @param hexmode An hexmode object, or a character string that can be converted
+#' to an hexmode object.
+#' @param tz The time zone in which to recreate the time object, by default, use
+#' current time zone for this machine.
+#' @return A character string with hexadecimal representation of the time. This
+#' could be used as a unique identifier (fingerprint) for objects that are
+#' sequencially created in time. The reverse function gets time from a
+#' fingerprint.
+#' @author \email{Philippe.Grosjean@@umons.ac.be}
+#' @export
+#' @seealso [new_econum_data()], [options_econum()]
+#' @keywords utilities
+#' @examples
+#' (fp <- time_to_fingerprint(Sys.time()))
+#' fingerprint_to_time(fp) # Reverse process
+#' rm(fp)
+time_to_fingerprint <- function(Time) {
+  # Calculate an hexadecimal "fingerprint" based on time (rounding down to sec)
+  toupper(as.hexmode(as.integer(Time)))
+}
+
+#' @export
+#' @rdname time_to_fingerprint
+fingerprint_to_time <- function(hexmode, tz = "") {
+  # Like with Sys.time(), it produces a POSIXct object with NULL tzone attribute
   # Fingerprint is always produced in UTC time!
   res <- as.POSIXct(strtoi(as.hexmode(hexmode), 16L),
     origin = "1970-01-01 00:00.00", tz = "UTC")

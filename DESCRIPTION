@@ -2,7 +2,7 @@ Package: econum
 Type: Package
 Title: Various Tools Developed at EcoNum Lab
 Description: Control of chemostats and titrators. Calculation routines for EcoNum lab.
-Version: 1.1-7
+Version: 1.2-0
 Date: 2018-01-09
 Authors@R: c(person("Philippe", "Grosjean", role = c("aut", "cre"),
   email = "phgrosjean@sciviews.org"))
@@ -16,3 +16,6 @@ URL: https://github.com/EcoNum/econum, http://econum.umons.ac.be/
 BugReports: https://github.com/EcoNum/econum/issues
 LazyData: yes
 NeedsCompilation: no
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 6.0.1
+#VignetteBuilder: knitr

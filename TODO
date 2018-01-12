@@ -1,5 +1,11 @@
 # econum To Do list
 
+* WTW routines
+    - calibration + calibration report
+    - read pressure in mbar + set/get salinity
+    - synch date and time with computer
+    - measure conductivity/salinity + mV
+
 * Integrate the titration routines
 
 * Integrate the IKS monitoring routines
