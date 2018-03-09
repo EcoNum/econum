@@ -72,11 +72,16 @@ sample_date = get_opt_econum("def_sample_date"), author = "", date = Sys.time(),
 comment = NULL, topic = NULL), class = NULL) {
   # Convert a data frame into a minimal EcoNumData object
   m <- metadata
-  if (m$project == "") m$project <- get_opt_econum("def_project")
-  if (m$sample == "") m$sample <- get_opt_econum("def_sample")
-  if (m$author == "") m$author <- get_opt_econum("def_author")
-  if (m$sample_date == "") m$sample_date <- get_opt_econum("def_sample_date")
-  if (m$date == "") m$date <- Sys.time()
+  if (is.null(m$project) || m$project == "")
+    m$project <- get_opt_econum("def_project")
+  if (is.null(m$sample) || m$sample == "")
+    m$sample <- get_opt_econum("def_sample")
+  if (is.null(m$author) || m$author == "")
+    m$author <- get_opt_econum("def_author")
+  if (is.null(m$sample_date) || m$sample_date == "")
+    m$sample_date <- get_opt_econum("def_sample_date")
+  if (is.null(m$date) || m$date == "")
+    m$date <- Sys.time()
   # Create clean metadata list
   metadata <- list(project = m$project, sample = m$sample,
     sample_date = m$sample_date, author = m$author, date = m$date,

@@ -5,6 +5,10 @@
 * Bug corrected: missmatch between localRepos (old name) and local_repos
   (new name) for the corresponding otion. Idem for remoteRepos/remote_repos.
 
+* new_econum_data() now works with missing metadata().
+
+* repos_load() now passes ... to validate().
+
 
 ## Changes in econum 1.1-7
 
