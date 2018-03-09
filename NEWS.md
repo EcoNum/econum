@@ -5,7 +5,7 @@
 * Bug corrected: missmatch between localRepos (old name) and local_repos
   (new name) for the corresponding otion. Idem for remoteRepos/remote_repos.
 
-* new_econum_data() now works with missing metadata().
+* new_econum_data() now works with missing metadata() and allows for custom metadata also.
 
 * repos_load() now passes ... to validate().
 

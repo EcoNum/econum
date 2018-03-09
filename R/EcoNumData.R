@@ -82,10 +82,19 @@ comment = NULL, topic = NULL), class = NULL) {
     m$sample_date <- get_opt_econum("def_sample_date")
   if (is.null(m$date) || m$date == "")
     m$date <- Sys.time()
+  # Collect custom metadata at the end
+  m2 <- m
+  m2$project <- NULL
+  m2$sample <- NULL
+  m2$sample_date <- NULL
+  m2$author <- NULL
+  m2$date <- NULL
+  m2$comment <- NULL
+  m2$topic <- NULL
   # Create clean metadata list
-  metadata <- list(project = m$project, sample = m$sample,
+  metadata <- c(list(project = m$project, sample = m$sample,
     sample_date = m$sample_date, author = m$author, date = m$date,
-    comment = m$comment, topic = m$topic)
+    comment = m$comment, topic = m$topic), m2)
   x <- as.data.frame(x)
   attr(x, "metadata") <- metadata
   class(x) <- c(class, "EcoNumData", "data.frame")
