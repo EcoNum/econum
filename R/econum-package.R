@@ -13,7 +13,7 @@
 #' - [gce8_open()] to control a GCE 8-relay card,
 #'
 #' @docType package
-#' @name SciViews-package
+#' @name econum-package
 #'
 #' @import tcltk
 #' @import svMisc

@@ -94,14 +94,14 @@ options_econum <- function(opt) {
     # For Linux, it is /media/EcoNumDataPublic/EcoNumData
     # and for Mac OS X, it is /Volumes/Public/EcoNumData
     if (.Platform$OS.type == "windows") {
-      opt$localRepos <- "d:/EcoNumData"
-      opt$remoteRepos <- "t:/EcoNumData"
+      opt$local_repos <- "d:/EcoNumData"
+      opt$remote_Repos <- "t:/EcoNumData"
     } else {
-      opt$localRepos <- "~/EcoNumData"
+      opt$local_repos <- "~/EcoNumData"
       if (Sys.info()["sysname"] == "Darwin" ||
         file.exists("/Volumes/Public/EcoNumData")) {
-        opt$remoteRepos <- "/Volumes/Public/EcoNumData"
-      } else opt$remoteRepos <- "/media/EcoNumPublic/EcoNumData"
+        opt$remote_repos <- "/Volumes/Public/EcoNumData"
+      } else opt$remote_repos <- "/media/EcoNumPublic/EcoNumData"
     }
 
     # Default general metadata
@@ -184,7 +184,7 @@ set_opt_econum <- function(key, value) {
 #' Get an hexadecimal unique identifier corresponding to time an object is
 #' created. A time object from a hexadecimal fingerprint can be also obtained.
 #'
-#' @param Time A POSIXct object indicating time an `EcoNumData` object is
+#' @param time A POSIXct object indicating time an `EcoNumData` object is
 #' created.
 #' @param hexmode An hexmode object, or a character string that can be converted
 #' to an hexmode object.

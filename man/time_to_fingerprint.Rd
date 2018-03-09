@@ -10,14 +10,14 @@ time_to_fingerprint(time, tz = "GMT")
 fingerprint_to_time(hexmode, tz = "GMT")
 }
 \arguments{
+\item{time}{A POSIXct object indicating time an \code{EcoNumData} object is
+created.}
+
 \item{tz}{The time zone in which to recreate the time object, by default, use
 current time zone for this machine.}
 
 \item{hexmode}{An hexmode object, or a character string that can be converted
 to an hexmode object.}
-
-\item{Time}{A POSIXct object indicating time an \code{EcoNumData} object is
-created.}
 }
 \value{
 A character string with hexadecimal representation of the time. This

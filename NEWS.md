@@ -1,6 +1,12 @@
 # econum News
 
-## Change in econum 1.1-7
+## Changes in econum 1.2.0
+
+* Bug corrected: missmatch between localRepos (old name) and local_repos
+  (new name) for the corresponding otion. Idem for remoteRepos/remote_repos.
+
+
+## Changes in econum 1.1-7
 
 * Rework of code.
 
