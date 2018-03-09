@@ -75,6 +75,8 @@ comment = NULL, topic = NULL), class = NULL) {
   if (m$project == "") m$project <- get_opt_econum("def_project")
   if (m$sample == "") m$sample <- get_opt_econum("def_sample")
   if (m$author == "") m$author <- get_opt_econum("def_author")
+  if (m$sample_date == "") m$sample_date <- get_opt_econum("def_sample_date")
+  if (m$date == "") m$date <- Sys.time()
   # Create clean metadata list
   metadata <- list(project = m$project, sample = m$sample,
     sample_date = m$sample_date, author = m$author, date = m$date,
@@ -227,7 +229,7 @@ repos_load <- function(file, backup_existing = FALSE, ...) {
   if (class == res) class <- NULL
 
   # Validate the object
-  object <- validate(get(res), file = file)
+  object <- validate(get(res), file = file, ...)
 
   if (isTRUE(backup_existing)) {
     # If res object already exists in .GlobalEnv, resave as res2
