@@ -78,9 +78,9 @@ comment = NULL, topic = NULL), class = NULL) {
     m$sample <- get_opt_econum("def_sample")
   if (is.null(m$author) || m$author == "")
     m$author <- get_opt_econum("def_author")
-  if (is.null(m$sample_date) || m$sample_date == "")
+  if (is.null(m$sample_date) || (is.character(m$sample_date) &&  m$sample_date == ""))
     m$sample_date <- get_opt_econum("def_sample_date")
-  if (is.null(m$date) || m$date == "")
+  if (is.null(m$date) || (is.character(m$date) && m$date == ""))
     m$date <- Sys.time()
   # Collect custom metadata at the end
   m2 <- m

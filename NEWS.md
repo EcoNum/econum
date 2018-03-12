@@ -2,8 +2,10 @@
 
 ## Changes in econum 1.2.0
 
+* Bug corrected: error while interpreting date and sample_date in new_econum_data()
+
 * Bug corrected: missmatch between localRepos (old name) and local_repos
-  (new name) for the corresponding otion. Idem for remoteRepos/remote_repos.
+  (new name) for the corresponding option. Idem for remoteRepos/remote_repos.
 
 * new_econum_data() now works with missing metadata() and allows for custom metadata also.
 
