@@ -111,7 +111,5 @@ gce8_close() # On the other hand, this is required to free the port!
 \author{
 Philippe Grosjean \email{Philippe.Grosjean@umons.ac.be}
 }
-\concept{
-Hardware control
-}
+\concept{Hardware control}
 \keyword{utilities}

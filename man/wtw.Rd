@@ -29,9 +29,18 @@ wtw_info(port = getOption("wtw_port"), timeout = 1000)
 
 wtw_read(port = getOption("wtw_port"), timeout = 1000, O2 = FALSE)
 
-wtw_record(file = NULL, interval = 10, Nmax = 10,
-  port = getOption("wtw_port"), timeout = 1000, O2 = TRUE,
-  init.data = NULL, graph = TRUE, title = "WTW record", ...)
+wtw_record(
+  file = NULL,
+  interval = 10,
+  Nmax = 10,
+  port = getOption("wtw_port"),
+  timeout = 1000,
+  O2 = TRUE,
+  init.data = NULL,
+  graph = TRUE,
+  title = "WTW record",
+  ...
+)
 }
 \arguments{
 \item{port}{A serial port as \code{"com1"}, or the port number as \code{1}.}
@@ -122,7 +131,5 @@ rm(wtw_dat)
 \author{
 Philippe Grosjean \email{Philippe.Grosjean@umons.ac.be}
 }
-\concept{
-Scientific instruments control
-}
+\concept{Scientific instruments control}
 \keyword{utilities}

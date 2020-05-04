@@ -27,9 +27,13 @@ iks_get_data(port = getOption("iks_port"), iks_name = NULL)
 
 iks_set_data(data, port = getOption("iks_port"), iks_name = NULL)
 
-iks_open(port = getOption("iks_port"), iks_name = "iks",
+iks_open(
+  port = getOption("iks_port"),
+  iks_name = "iks",
   probes_names = paste("p0", 1:8, sep = ""),
-  sockets_names = sprintf("s\%02d", 1:16), procfun = iks_process)
+  sockets_names = sprintf("s\%02d", 1:16),
+  procfun = iks_process
+)
 
 iks_close(port = getOption("iks_port"))
 
@@ -133,7 +137,5 @@ iks_get_all()
 \author{
 Philippe Grosjean \email{Philippe.Grosjean@umons.ac.be}
 }
-\concept{
-hardware control
-}
+\concept{hardware control}
 \keyword{utilities}

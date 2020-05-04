@@ -13,9 +13,13 @@
 \alias{repos_load}
 \title{Create, manipulate, save and load EcoNumData objects}
 \usage{
-new_econum_data(x, metadata = list(project = "", sample = "", sample_date =
-  get_opt_econum("def_sample_date"), author = "", date = Sys.time(), comment =
-  NULL, topic = NULL), class = NULL)
+new_econum_data(
+  x,
+  metadata = list(project = "", sample = "", sample_date =
+    get_opt_econum("def_sample_date"), author = "", date = Sys.time(), comment = NULL,
+    topic = NULL),
+  class = NULL
+)
 
 \method{print}{EcoNumData}(x, ...)
 
@@ -29,8 +33,7 @@ validate(object, ...)
 
 repos_save(object, envir = .GlobalEnv, local = TRUE, remote = TRUE, ...)
 
-\method{repos_save}{EcoNumData}(object, envir = .GlobalEnv, local = TRUE,
-  remote = TRUE, ...)
+\method{repos_save}{EcoNumData}(object, envir = .GlobalEnv, local = TRUE, remote = TRUE, ...)
 
 repos_load(file, backup_existing = FALSE, ...)
 }
@@ -61,7 +64,7 @@ local repository, defined by \code{get_opt_econum("local_repos")}.}
 remote repository, defined by \code{get_opt_econum("remote_repos")}.}
 
 \item{backup_existing}{Logical (\code{FALSE} by default). Should we backup an
-object of the same name as the one that is loaded (it will become  \code{<obj>2})?}
+object of the same name as the one that is loaded (it will become  \verb{<obj>2})?}
 }
 \value{
 For \code{new_econum_data()}, the object that is just created. It is a
@@ -116,7 +119,5 @@ rm(local_dir)
 \author{
 Philippe Grosjean \email{Philippe.Grosjean@umons.ac.be}
 }
-\concept{
-GUI API implementation
-}
+\concept{GUI API implementation}
 \keyword{misc}

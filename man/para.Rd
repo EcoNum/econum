@@ -33,10 +33,10 @@ read its current state.
 }
 \note{
 These functions use the \code{inpout32.dll} and \code{lpttcl.dll} version 3.0
-that are provided in the \code{/bin} subdirectory of this package. These dlls work
+that are provided in the \verb{/bin} subdirectory of this package. These dlls work
 only under Windows (95 -> XP) and are probably not compatible with Windows
 Vista or higher. They do not work either under Linux or Mac OS X. You must
-also copy these dlls in the \code{/windows/system32} directory (administrator
+also copy these dlls in the \verb{/windows/system32} directory (administrator
 rights required) before you can use them.
 }
 \examples{
@@ -61,7 +61,5 @@ para(st, FALSE) # Read current config, keeping channel names from st
 \author{
 Philippe Grosjean \email{Philippe.Grosjean@umons.ac.be}
 }
-\concept{
-Hardware interface
-}
+\concept{Hardware interface}
 \keyword{utilities}
