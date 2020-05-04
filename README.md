@@ -1,11 +1,11 @@
 # econum
 
-[![Linux & OSX Build Status](https://travis-ci.org/EcoNum/econum.svg )](https://travis-ci.org/EcoNum/econum)
-[![Win Build Status](https://ci.appveyor.com/api/projects/status/github/EcoNum/econum?branch=master&svg=true)](http://ci.appveyor.com/project/phgrosjean/econum)
+[![Linux & OSX Build Status](https://travis-ci.com/EcoNum/econum.svg )](https://travis-ci.com/EcoNum/econum)
+[![Win Build Status](https://ci.appveyor.com/api/projects/status/github/EcoNum/econum?branch=master&svg=true)](https://ci.appveyor.com/project/phgrosjean/econum)
 [![Coverage Status](https://img.shields.io/codecov/c/github/EcoNum/econum/master.svg)
 ](https://codecov.io/github/EcoNum/econum?branch=master)
-[![CRAN Status](http://www.r-pkg.org/badges/version/econum)](http://cran.r-project.org/package=econum)
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](http://www.gnu.org/licenses/MIT)
+[![CRAN Status](https://www.r-pkg.org/badges/version/econum)](https://cran.r-project.org/package=econum)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://www.gnu.org/licenses/MIT)
 
 Various routines to control scientific devices or to perform ecophysiological calculations.
 
